@@ -19,7 +19,7 @@ headerImg: beach.jpg
 
 - **Project (30%)** :
   A [project](project.html) that will be completed **in a group of 4** over
-  the quarter and demo-ed and evaluated during the final exam block.
+  the quarter and demo-ed and evaluated during the final exam block on **Friday 12/15 11:30 a.m. – 2:30 p.m**.
 
 - **Piazza (5%)** :
   Extra credit for top-15 best participants on Piazza.
