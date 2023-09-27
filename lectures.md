@@ -11,10 +11,10 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 
 | **Date**   | **Topic**                       | **Notes**                 | **Markup**           | **Code**           |
 |:----------:|:--------------------------------|:--------------------------|:---------------------|:-------------------|
-| *9/28*     | Intro                           | [pdf][00-intro]           | [pdf][01-lambda-A]   |                    |
+| *9/28*     | Intro                           | [pdf][00-intro]           |                      |                    |
+|            | Lambda Calculus                 | [html][01-lambda]         |                      |                    |
 
 <!--
-|            | Lambda Calculus                 | [html][01-lambda]         | [pdf][01-lambda-B]   |                    |
 |            | ""                              |                           | [pdf][01-lambda-C]   |                    |
 |            | ""                              |                           | [pdf][01-lambda-D]   | [code][code-10-5]  |
 |            | Haskell Basics                  | [html][02-hs-basic]       |                      | [code][code-10-7]  |
