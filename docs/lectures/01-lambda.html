@@ -279,7 +279,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h3 id="formalization">1936: Formalization</h3>
 <p>What is the <strong>smallest universal language</strong>?</p>
 <figure>
-<img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg" id="fig:turing" class="align-center" style="width:40.0%" alt="Alan Turing" />
+<img src="https://upload.wikimedia.org/wikipedia/id/c/c8/Alan_Turing_photo.jpg" id="fig:turing" class="align-center" style="width:40.0%" alt="Alan Turing" />
 <figcaption aria-hidden="true">Alan Turing</figcaption>
 </figure>
 <p><br>
@@ -402,8 +402,8 @@ variants of lambda calculus.</p>
 <h2 id="syntax-what-programs-look-like">Syntax: What Programs <em>Look Like</em></h2>
 <p><br></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>e <span class="op">::=</span> x</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> \x <span class="ot">-&gt;</span> e</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> e1 e2</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> (\x <span class="ot">-&gt;</span> e)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> (e e)</span></code></pre></div>
 <p><br></p>
 <p>Programs are <strong>expressions</strong> <code class="sourceCode haskell">e</code> (also called <strong><span class="math inline"><em>λ</em></span>-terms</strong>)
 of one of three kinds:</p>
@@ -414,13 +414,13 @@ of one of three kinds:</p>
 </ul></li>
 <li><strong>Abstraction</strong> (aka <em>nameless</em> function definition)
 <ul>
-<li><code class="sourceCode haskell">\x <span class="ot">-&gt;</span> e</code></li>
+<li><code class="sourceCode haskell">(\x <span class="ot">-&gt;</span> e)</code></li>
 <li><code class="sourceCode haskell">x</code> is the <em>formal</em> parameter, <code class="sourceCode haskell">e</code> is the <em>body</em></li>
 <li>“for any <code class="sourceCode haskell">x</code> compute <code class="sourceCode haskell">e</code>”</li>
 </ul></li>
 <li><strong>Application</strong> (aka function call)
 <ul>
-<li><code class="sourceCode haskell">e1 e2</code></li>
+<li><code class="sourceCode haskell">(e1 e2)</code></li>
 <li><code class="sourceCode haskell">e1</code> is the <em>function</em>, <code class="sourceCode haskell">e2</code> is the <em>argument</em></li>
 <li>in your favorite language: <code class="sourceCode haskell">e1(e2)</code></li>
 </ul></li>
@@ -437,12 +437,12 @@ of one of three kinds:</p>
 <br>
 <br></p>
 <h2 id="examples">Examples</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>\x <span class="ot">-&gt;</span> x             <span class="co">-- The identity function (id)</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>\x <span class="ot">-&gt;</span> x             <span class="co">-- The &quot;identity function&quot; (id)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                    <span class="co">-- (&quot;for any x compute x&quot;)</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>\x <span class="ot">-&gt;</span> (\y <span class="ot">-&gt;</span> y)     <span class="co">-- A function that returns (id)</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>\f <span class="ot">-&gt;</span> (f (\x <span class="ot">-&gt;</span> x)) <span class="co">-- A function that applies its argument to id </span></span></code></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>\f <span class="ot">-&gt;</span> (f (\x <span class="ot">-&gt;</span> x)) <span class="co">-- A function that applies its argument to id</span></span></code></pre></div>
 <p><br>
 <br>
 <br>
@@ -478,8 +478,8 @@ of one of three kinds:</p>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="co">-- (&quot;for any x compute x&quot;)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>\x <span class="ot">-&gt;</span> (\y <span class="ot">-&gt;</span> y)     <span class="co">-- A function that returns the identity function</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>\f <span class="ot">-&gt;</span> f (\x <span class="ot">-&gt;</span> x)   <span class="co">-- A function that applies its argument </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>\f <span class="ot">-&gt;</span> f (\x <span class="ot">-&gt;</span> x)   <span class="co">-- A function that applies its argument</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                    <span class="co">-- to the identity function</span></span></code></pre></div>
 <p><br></p>
 <p>How do I define a function with two arguments?</p>
@@ -571,7 +571,7 @@ of one of three kinds:</p>
 <br></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>\x y <span class="ot">-&gt;</span> y     <span class="co">-- A function that that takes two arguments</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>              <span class="co">-- and returns the second one...</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>(\x y <span class="ot">-&gt;</span> y) apple banana <span class="co">-- ... applied to two arguments</span></span></code></pre></div>
 <p><br>
 <br>
@@ -588,17 +588,33 @@ of one of three kinds:</p>
 <h2 id="semantics-what-programs-mean">Semantics : What Programs <em>Mean</em></h2>
 <p><br></p>
 <p>How do I “run” / “execute” a <span class="math inline"><em>λ</em></span>-term?</p>
-<p><br></p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br></p>
 <p>Think of middle-school algebra:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Simplify expression:</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span>) <span class="op">*</span> ((<span class="dv">3</span> <span class="op">*</span> <span class="dv">8</span>) <span class="op">-</span> <span class="dv">2</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> <span class="ot">=</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> <span class="ot">=</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>   <span class="dv">3</span>      <span class="op">*</span> ((<span class="dv">3</span> <span class="op">*</span> <span class="dv">8</span>) <span class="op">-</span> <span class="dv">2</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="ot">=</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="ot">=</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>   <span class="dv">3</span>      <span class="op">*</span> ( <span class="dv">24</span>     <span class="op">-</span> <span class="dv">2</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> <span class="ot">=</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> <span class="ot">=</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>   <span class="dv">3</span>      <span class="op">*</span>  <span class="dv">22</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="ot">=</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="ot">=</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>   <span class="dv">66</span></span></code></pre></div>
 <p><br></p>
 <p><strong>Execute</strong> = rewrite step-by-step</p>
@@ -634,25 +650,25 @@ of one of three kinds:</p>
 <br></p>
 <h2 id="semantics-scope-of-a-variable">Semantics: Scope of a Variable</h2>
 <p>The part of a program where a <strong>variable is visible</strong></p>
-<p>In the expression <code class="sourceCode haskell">\x <span class="ot">-&gt;</span> e</code></p>
+<p>In the expression <code class="sourceCode haskell">(\x <span class="ot">-&gt;</span> e)</code></p>
 <ul>
 <li><p><code class="sourceCode haskell">x</code> is the newly introduced variable</p></li>
 <li><p><code class="sourceCode haskell">e</code> is <strong>the scope</strong> of <code class="sourceCode haskell">x</code></p></li>
-<li><p>any occurrence of <code class="sourceCode haskell">x</code> in <code class="sourceCode haskell">\x <span class="ot">-&gt;</span> e</code> is <strong>bound</strong> (by the <strong>binder</strong> <code class="sourceCode haskell">\x</code>)</p></li>
+<li><p>any occurrence of <code class="sourceCode haskell">x</code> in <code class="sourceCode haskell">(\x <span class="ot">-&gt;</span> e)</code> is <strong>bound</strong> (by the <strong>binder</strong> <code class="sourceCode haskell">\x</code>)</p></li>
 </ul>
 <p><br></p>
 <p>For example, <code class="sourceCode haskell">x</code> is bound in:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  \x <span class="ot">-&gt;</span> x</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  \x <span class="ot">-&gt;</span> (\y <span class="ot">-&gt;</span> x)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  (\x <span class="ot">-&gt;</span> x)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  (\x <span class="ot">-&gt;</span> (\y <span class="ot">-&gt;</span> x))</span></code></pre></div>
 <p><br>
 <br></p>
 <p>An occurrence of <code class="sourceCode haskell">x</code> in <code class="sourceCode haskell">e</code> is <strong>free</strong> if it’s <em>not bound</em> by an enclosing abstraction</p>
 <p><br>
 For example, <code class="sourceCode haskell">x</code> is free in:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  x y                <span class="co">-- no binders at all!  </span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  \y <span class="ot">-&gt;</span> x y          <span class="co">-- no \x binder</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  (\x <span class="ot">-&gt;</span> \y <span class="ot">-&gt;</span> y) x  <span class="co">-- x is outside the scope of the \x binder;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                     <span class="co">-- intuition: it's not &quot;the same&quot; x</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  (x y)                <span class="co">-- no binders at all!</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  (\y <span class="ot">-&gt;</span> x y)          <span class="co">-- no \x binder</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  (\x <span class="ot">-&gt;</span> (\y <span class="ot">-&gt;</span> y)) x  <span class="co">-- x is outside the scope of the \x binder;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                       <span class="co">-- intuition: it's not &quot;the same&quot; x</span></span></code></pre></div>
 <p><br>
 <br>
 <br>
@@ -795,9 +811,9 @@ replace all free occurrences of the <em>formal</em> by that <em>argument</em></p
 <br></p>
 <h2 id="redex-examples">Redex Examples</h2>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(\x <span class="ot">-&gt;</span> x) apple     </span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(\x <span class="ot">-&gt;</span> x) apple</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span>b<span class="op">&gt;</span> apple</span></code></pre></div>
-<p>Is this right? Ask <a href="http://goto.ucsd.edu:8095/index.html#?demo=blank.lc">Elsa</a>!</p>
+<p>Is this right? Ask <a href="https://elsa.goto.ucsd.edu/index.html#?demo=permalink%2F1695925711_23.lc">Elsa</a></p>
 <p><br>
 <br>
 <br>
@@ -876,8 +892,8 @@ replace all free occurrences of the <em>formal</em> by that <em>argument</em></p
 <p><br></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fill_this_in apple</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ot">=</span>b<span class="op">&gt;</span> banana</span></code></pre></div>
-<p>ELSA: https://goto.ucsd.edu/elsa/index.html</p>
-<p><a href="https://goto.ucsd.edu/elsa/index.html#?demo=permalink%2F1585434473_24432.lc">Click here to try this exercise</a></p>
+<p>ELSA: https://elsa.goto.ucsd.edu/index.html</p>
+<p><a href="https://elsa.goto.ucsd.edu/index.html#?demo=permalink%2F1585434473_24432.lc">Click here to try this exercise</a></p>
 <p><br>
 <br>
 <br>
@@ -928,8 +944,8 @@ replace all free occurrences of the <em>formal</em> by that <em>argument</em></p
 <h2 id="capture-avoiding-substitution">Capture-Avoiding Substitution</h2>
 <p>We have to fix our definition of <span class="math inline"><em>β</em></span>-reduction:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>  (\x <span class="ot">-&gt;</span> e1) e2   <span class="ot">=</span>b<span class="op">&gt;</span>   e1[x <span class="op">:=</span> e2]</span></code></pre></div>
-<p><br>
-where <code class="sourceCode haskell">e1[x <span class="op">:=</span> e2]</code> means <del>“<code class="sourceCode haskell">e1</code> with all <em>free</em> occurrences of <code class="sourceCode haskell">x</code> replaced with <code class="sourceCode haskell">e2</code>”</del></p>
+<p><br></p>
+<p>where <code class="sourceCode haskell">e1[x <span class="op">:=</span> e2]</code> means <del>“<code class="sourceCode haskell">e1</code> with all <em>free</em> occurrences of <code class="sourceCode haskell">x</code> replaced with <code class="sourceCode haskell">e2</code>”</del></p>
 <ul>
 <li><code class="sourceCode haskell">e1</code> with all <em>free</em> occurrences of <code class="sourceCode haskell">x</code> replaced with <code class="sourceCode haskell">e2</code></li>
 <li><strong>as long as</strong> no free variables of <code class="sourceCode haskell">e2</code> get captured</li>
@@ -938,13 +954,13 @@ where <code class="sourceCode haskell">e1[x <span class="op">:=</span> e2]</code
 <p>Formally:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x[x <span class="op">:=</span> e]            <span class="ot">=</span> e</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>y[x <span class="op">:=</span> e]            <span class="ot">=</span> y                          <span class="co">-- as x /= y</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>y[x <span class="op">:=</span> e]            <span class="ot">=</span> y               <span class="co">-- as x /= y</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>(e1 e2)[x <span class="op">:=</span> e]      <span class="ot">=</span> (e1[x <span class="op">:=</span> e]) (e2[x <span class="op">:=</span> e])</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>(\x <span class="ot">-&gt;</span> e1)[x <span class="op">:=</span> e]   <span class="ot">=</span> \x <span class="ot">-&gt;</span> e1                   <span class="co">-- Q: Why leave `e1` unchanged?</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>(\x <span class="ot">-&gt;</span> e1)[x <span class="op">:=</span> e]   <span class="ot">=</span> \x <span class="ot">-&gt;</span> e1        <span class="co">-- Q: Why `e1` unchanged?</span></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>(\y <span class="ot">-&gt;</span> e1)[x <span class="op">:=</span> e] </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>(\y <span class="ot">-&gt;</span> e1)[x <span class="op">:=</span> e]</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="fu">not</span> (y <span class="kw">in</span> <span class="dt">FV</span>(e)) <span class="ot">=</span> \y <span class="ot">-&gt;</span> e1[x <span class="op">:=</span> e]</span></code></pre></div>
 <p><strong>Oops, but what to do if</strong> <code class="sourceCode haskell">y</code> is in the <em>free-variables</em> of <code class="sourceCode haskell">e</code>?</p>
 <ul>
@@ -1147,15 +1163,15 @@ such that you get the following behavior in <code class="sourceCode haskell">els
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">SECOND</span> <span class="ot">=</span> fill_this_in</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">THIRD</span>  <span class="ot">=</span> fill_this_in</span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>eval ex1 <span class="op">:</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>eval ex1 <span class="op">:</span></span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">FIRST</span> apple banana orange</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> apple </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> apple</span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>eval ex2 <span class="op">:</span> </span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>eval ex2 <span class="op">:</span></span>
 <span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">SECOND</span> apple banana orange</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> banana </span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>eval ex3 <span class="op">:</span> </span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> banana</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>eval ex3 <span class="op">:</span></span>
 <span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">THIRD</span> apple banana orange</span>
 <span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> orange</span></code></pre></div>
 <p>ELSA: https://goto.ucsd.edu/elsa/index.html</p>
@@ -1274,7 +1290,7 @@ with the <span class="math inline"><em>λ</em></span>-calculus.</p>
 <h2 id="example-branches-step-by-step">Example: Branches step-by-step</h2>
 <div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>eval ite_true<span class="op">:</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ITE</span> <span class="dt">TRUE</span> e1 e2</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span>d<span class="op">&gt;</span> (\b x y <span class="ot">-&gt;</span> b    x  y) <span class="dt">TRUE</span> e1 e2    <span class="co">-- expand def ITE  </span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span>d<span class="op">&gt;</span> (\b x y <span class="ot">-&gt;</span> b    x  y) <span class="dt">TRUE</span> e1 e2    <span class="co">-- expand def ITE</span></span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span>b<span class="op">&gt;</span>   (\x y <span class="ot">-&gt;</span> <span class="dt">TRUE</span> x  y)      e1 e2    <span class="co">-- beta-step</span></span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span>b<span class="op">&gt;</span>     (\y <span class="ot">-&gt;</span> <span class="dt">TRUE</span> e1 y)         e2    <span class="co">-- beta-step</span></span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span>b<span class="op">&gt;</span>            <span class="dt">TRUE</span> e1 e2               <span class="co">-- expand def TRUE</span></span>
@@ -1289,13 +1305,13 @@ with the <span class="math inline"><em>λ</em></span>-calculus.</p>
 <br></p>
 <h2 id="example-branches-step-by-step-1">Example: Branches step-by-step</h2>
 <p>Now you try it!</p>
-<p>Can you <a href="http://goto.ucsd.edu:8095/index.html#?demo=ite.lc">fill in the blanks to make it happen?</a></p>
+<p>Can you <a href="https://elsa.goto.ucsd.edu/index.html#?demo=ite.lc">fill in the blanks to make it happen?</a></p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>eval ite_false<span class="op">:</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ITE</span> <span class="dt">FALSE</span> e1 e2</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- fill the steps in!</span></span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span>b<span class="op">&gt;</span> e2  </span></code></pre></div>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span>b<span class="op">&gt;</span> e2</span></code></pre></div>
 <p><br>
 <br>
 <br>
@@ -1318,28 +1334,28 @@ with the <span class="math inline"><em>λ</em></span>-calculus.</p>
 <p>When you are done, you should get the following behavior:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>eval ex_not_t<span class="op">:</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">NOT</span> <span class="dt">TRUE</span> <span class="op">=*&gt;</span> <span class="dt">FALSE</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>eval ex_not_f<span class="op">:</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">NOT</span> <span class="dt">FALSE</span> <span class="op">=*&gt;</span> <span class="dt">TRUE</span> </span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">NOT</span> <span class="dt">FALSE</span> <span class="op">=*&gt;</span> <span class="dt">TRUE</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>eval ex_or_ff<span class="op">:</span></span>
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">OR</span> <span class="dt">FALSE</span> <span class="dt">FALSE</span> <span class="op">=*&gt;</span> <span class="dt">FALSE</span></span>
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>eval ex_or_ft<span class="op">:</span></span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">OR</span> <span class="dt">FALSE</span> <span class="dt">TRUE</span> <span class="op">=*&gt;</span> <span class="dt">TRUE</span></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>eval ex_or_ft<span class="op">:</span></span>
 <span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">OR</span> <span class="dt">TRUE</span> <span class="dt">FALSE</span> <span class="op">=*&gt;</span> <span class="dt">TRUE</span></span>
 <span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>eval ex_or_tt<span class="op">:</span></span>
 <span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">OR</span> <span class="dt">TRUE</span> <span class="dt">TRUE</span> <span class="op">=*&gt;</span> <span class="dt">TRUE</span></span>
-<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>eval ex_and_ff<span class="op">:</span></span>
 <span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">AND</span> <span class="dt">FALSE</span> <span class="dt">FALSE</span> <span class="op">=*&gt;</span> <span class="dt">FALSE</span></span>
 <span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>eval ex_and_ft<span class="op">:</span></span>
 <span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">AND</span> <span class="dt">FALSE</span> <span class="dt">TRUE</span> <span class="op">=*&gt;</span> <span class="dt">FALSE</span></span>
-<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>eval ex_and_ft<span class="op">:</span></span>
 <span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">AND</span> <span class="dt">TRUE</span> <span class="dt">FALSE</span> <span class="op">=*&gt;</span> <span class="dt">FALSE</span></span>
 <span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a></span>
@@ -1400,14 +1416,14 @@ with the <span class="math inline"><em>λ</em></span>-calculus.</p>
 <br></p>
 <h2 id="pairs-api">Pairs : API</h2>
 <p>We need to define three functions</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">PAIR</span> <span class="ot">=</span> \x y <span class="ot">-&gt;</span> <span class="op">???</span>    <span class="co">-- Make a pair with elements x and y </span></span>
+<div class="sourceCode" id="cb43"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">PAIR</span> <span class="ot">=</span> \x y <span class="ot">-&gt;</span> <span class="op">???</span>    <span class="co">-- Make a pair with elements x and y</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>                          <span class="co">-- { fst : x, snd : y }</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">FST</span>  <span class="ot">=</span> \p <span class="ot">-&gt;</span> <span class="op">???</span>      <span class="co">-- Return first element </span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">FST</span>  <span class="ot">=</span> \p <span class="ot">-&gt;</span> <span class="op">???</span>      <span class="co">-- Return first element</span></span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                          <span class="co">-- p.fst</span></span>
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">SND</span>  <span class="ot">=</span> \p <span class="ot">-&gt;</span> <span class="op">???</span>      <span class="co">-- Return second element</span></span>
 <span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>                          <span class="co">-- p.snd</span></span></code></pre></div>
 <p>such that</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>eval ex_fst<span class="op">:</span> </span>
+<div class="sourceCode" id="cb44"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>eval ex_fst<span class="op">:</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">FST</span> (<span class="dt">PAIR</span> apple banana) <span class="op">=*&gt;</span> apple</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>eval ex_snd<span class="op">:</span></span>
@@ -1457,7 +1473,7 @@ with the <span class="math inline"><em>λ</em></span>-calculus.</p>
 <span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>eval ex2<span class="op">:</span></span>
 <span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">SND3</span> (<span class="dt">TRIPLE</span> apple banana orange)</span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> banana </span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> banana</span>
 <span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>eval ex3<span class="op">:</span></span>
 <span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">THD3</span> (<span class="dt">TRIPLE</span> apple banana orange)</span>
@@ -1627,25 +1643,25 @@ is encoded as a combinator that
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">TWO</span>  <span class="ot">=</span> \f x <span class="ot">-&gt;</span> f (f x)</span>
 <span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">INC</span>  <span class="ot">=</span> \n f x <span class="ot">-&gt;</span> f (n f x)</span>
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">ADD</span>  <span class="ot">=</span> fill_this_in </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">ADD</span>  <span class="ot">=</span> fill_this_in</span>
 <span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>eval add_zero_zero<span class="op">:</span> </span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>eval add_zero_zero<span class="op">:</span></span>
 <span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADD</span> <span class="dt">ZERO</span> <span class="dt">ZERO</span> <span class="op">=~&gt;</span> <span class="dt">ZERO</span></span>
 <span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>eval add_zero_one<span class="op">:</span> </span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>eval add_zero_one<span class="op">:</span></span>
 <span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADD</span> <span class="dt">ZERO</span> <span class="dt">ONE</span> <span class="op">=~&gt;</span> <span class="dt">ONE</span></span>
 <span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>eval add_zero_two<span class="op">:</span> </span>
-<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADD</span> <span class="dt">ZERO</span> <span class="dt">TWO</span> <span class="op">=~&gt;</span> <span class="dt">TWO</span> </span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>eval add_zero_two<span class="op">:</span></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADD</span> <span class="dt">ZERO</span> <span class="dt">TWO</span> <span class="op">=~&gt;</span> <span class="dt">TWO</span></span>
 <span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>eval add_one_zero<span class="op">:</span> </span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>eval add_one_zero<span class="op">:</span></span>
 <span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADD</span> <span class="dt">ONE</span> <span class="dt">ZERO</span> <span class="op">=~&gt;</span> <span class="dt">ONE</span></span>
 <span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>eval add_one_zero<span class="op">:</span> </span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>eval add_one_zero<span class="op">:</span></span>
 <span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADD</span> <span class="dt">ONE</span> <span class="dt">ONE</span> <span class="op">=~&gt;</span> <span class="dt">TWO</span></span>
 <span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>eval add_two_zero<span class="op">:</span> </span>
-<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADD</span> <span class="dt">TWO</span> <span class="dt">ZERO</span> <span class="op">=~&gt;</span> <span class="dt">TWO</span>  </span></code></pre></div>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>eval add_two_zero<span class="op">:</span></span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ADD</span> <span class="dt">TWO</span> <span class="dt">ZERO</span> <span class="op">=~&gt;</span> <span class="dt">TWO</span></span></code></pre></div>
 <h2 id="quiz-6">QUIZ</h2>
 <p>How shall we implement <code class="sourceCode haskell"><span class="dt">ADD</span></code>?</p>
 <p><strong>A.</strong> <code class="sourceCode haskell"><span class="kw">let</span> <span class="dt">ADD</span> <span class="ot">=</span> \n m <span class="ot">-&gt;</span> n <span class="dt">INC</span> m</code></p>
@@ -1793,7 +1809,7 @@ is encoded as a combinator that
 <span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">HEAD</span> (<span class="dt">CONS</span> apple (<span class="dt">CONS</span> banana (<span class="dt">CONS</span> cantaloupe (<span class="dt">CONS</span> dragon <span class="dt">NIL</span>))))</span>
 <span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">=~&gt;</span> apple</span>
 <span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>eval exTl </span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>eval exTl</span>
 <span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">TAIL</span> (<span class="dt">CONS</span> apple (<span class="dt">CONS</span> banana (<span class="dt">CONS</span> cantaloupe (<span class="dt">CONS</span> dragon <span class="dt">NIL</span>))))</span>
 <span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">=~&gt;</span> <span class="dt">CONS</span> banana (<span class="dt">CONS</span> cantaloupe (<span class="dt">CONS</span> dragon <span class="dt">NIL</span>)))</span></code></pre></div>
 <p><br>
@@ -1818,7 +1834,7 @@ is encoded as a combinator that
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>eval nth1 <span class="op">:</span></span>
 <span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">GetNth</span> <span class="dt">ZERO</span> (<span class="dt">CONS</span> apple (<span class="dt">CONS</span> banana (<span class="dt">CONS</span> cantaloupe <span class="dt">NIL</span>)))</span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">=~&gt;</span> apple </span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">=~&gt;</span> apple</span>
 <span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>eval nth1 <span class="op">:</span></span>
 <span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">GetNth</span> <span class="dt">ONE</span> (<span class="dt">CONS</span> apple (<span class="dt">CONS</span> banana (<span class="dt">CONS</span> cantaloupe <span class="dt">NIL</span>)))</span>
@@ -1860,8 +1876,8 @@ is encoded as a combinator that
 <h2 id="quiz-8">QUIZ</h2>
 <p>You <em>can</em> write <code class="sourceCode haskell"><span class="dt">SUM</span></code> using numerals but its <em>tedious</em>.</p>
 <p>Is this a correct implementation of <code class="sourceCode haskell"><span class="dt">SUM</span></code>?</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">SUM</span> <span class="ot">=</span> \n <span class="ot">-&gt;</span> <span class="dt">ITE</span> (<span class="dt">ISZ</span> n) </span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>            <span class="dt">ZERO</span> </span>
+<div class="sourceCode" id="cb63"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">SUM</span> <span class="ot">=</span> \n <span class="ot">-&gt;</span> <span class="dt">ITE</span> (<span class="dt">ISZ</span> n)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>            <span class="dt">ZERO</span></span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>            (<span class="dt">ADD</span> n (<span class="dt">SUM</span> (<span class="dt">DEC</span> n)))</span></code></pre></div>
 <p><strong>A.</strong> Yes</p>
 <p><strong>B.</strong> No</p>
@@ -1880,8 +1896,8 @@ is encoded as a combinator that
 <li>Named terms in Elsa are just syntactic sugar</li>
 <li>To translate an Elsa term to <span class="math inline"><em>λ</em></span>-calculus: replace each name with its definition</li>
 </ul>
-<div class="sourceCode" id="cb64"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>\n <span class="ot">-&gt;</span> <span class="dt">ITE</span> (<span class="dt">ISZ</span> n) </span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">ZERO</span> </span>
+<div class="sourceCode" id="cb64"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>\n <span class="ot">-&gt;</span> <span class="dt">ITE</span> (<span class="dt">ISZ</span> n)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">ZERO</span></span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>        (<span class="dt">ADD</span> n (<span class="dt">SUM</span> (<span class="dt">DEC</span> n))) <span class="co">-- But SUM is not yet defined!</span></span></code></pre></div>
 <p><br>
 <br></p>
@@ -1927,16 +1943,16 @@ is encoded as a combinator that
 <p><br>
 <br></p>
 <p><strong>Step 1:</strong> Pass in the function to call “recursively”</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">STEP</span> <span class="ot">=</span> </span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  \rec <span class="ot">-&gt;</span> \n <span class="ot">-&gt;</span> <span class="dt">ITE</span> (<span class="dt">ISZ</span> n) </span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">ZERO</span> </span>
+<div class="sourceCode" id="cb65"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="dt">STEP</span> <span class="ot">=</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  \rec <span class="ot">-&gt;</span> \n <span class="ot">-&gt;</span> <span class="dt">ITE</span> (<span class="dt">ISZ</span> n)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">ZERO</span></span>
 <span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>                  (<span class="dt">ADD</span> n (rec (<span class="dt">DEC</span> n))) <span class="co">-- Call some rec</span></span></code></pre></div>
 <p><br>
 <br></p>
 <p><strong>Step 2:</strong> Do some magic to <code class="sourceCode haskell"><span class="dt">STEP</span></code>, so <code class="sourceCode haskell">rec</code> is itself</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>\n <span class="ot">-&gt;</span> <span class="dt">ITE</span> (<span class="dt">ISZ</span> n) <span class="dt">ZERO</span> (<span class="dt">ADD</span> n (rec (<span class="dt">DEC</span> n)))</span></code></pre></div>
 <p>That is, obtain a term <code class="sourceCode haskell"><span class="dt">MAGIC</span></code> such that</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dt">MAGIC</span> <span class="op">=*&gt;</span> <span class="dt">STEP</span> <span class="dt">MAGIC</span> </span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dt">MAGIC</span> <span class="op">=*&gt;</span> <span class="dt">STEP</span> <span class="dt">MAGIC</span></span></code></pre></div>
 <p><br>
 <br>
 <br>
@@ -1977,7 +1993,7 @@ is encoded as a combinator that
 <span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> <span class="dt">ADD</span> <span class="dt">TWO</span> (<span class="dt">ADD</span> <span class="dt">ONE</span> (<span class="dt">SUM</span> (<span class="dt">DEC</span> <span class="dt">ONE</span>)))</span>
 <span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> <span class="dt">ADD</span> <span class="dt">TWO</span> (<span class="dt">ADD</span> <span class="dt">ONE</span> (<span class="dt">SUM</span> <span class="dt">ZERO</span>))</span>
 <span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> <span class="dt">ADD</span> <span class="dt">TWO</span> (<span class="dt">ADD</span> <span class="dt">ONE</span> (<span class="dt">ITE</span> (<span class="dt">ISZ</span> <span class="dt">ZERO</span>) <span class="dt">ZERO</span> (<span class="dt">ADD</span> <span class="dt">ZERO</span> (<span class="dt">SUM</span> <span class="dt">DEC</span> <span class="dt">ZERO</span>)))</span>
-<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> <span class="dt">ADD</span> <span class="dt">TWO</span> (<span class="dt">ADD</span> <span class="dt">ONE</span> (<span class="dt">ZERO</span>)) </span>
+<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> <span class="dt">ADD</span> <span class="dt">TWO</span> (<span class="dt">ADD</span> <span class="dt">ONE</span> (<span class="dt">ZERO</span>))</span>
 <span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">=*&gt;</span> <span class="dt">THREE</span></span></code></pre></div>
 <p>How should we define <code class="sourceCode haskell"><span class="dt">FIX</span></code>???</p>
 <p><br>
