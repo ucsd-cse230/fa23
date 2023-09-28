@@ -74,7 +74,7 @@ siteCtx =
     constField "github_username"    "ranjitjhala"                             `mappend`
     constField "google_username"    "rjhala@ucsd.edu"                         `mappend`
     constField "google_userid"      "u/0/104385825850161331469"               `mappend`
-    constField "piazza_classid"     "class/ln0mcsonwy52sd"                    `mappend`
+    constField "piazza_classid"     "class/ln3oae6zy584n9"		      `mappend`
     constField "canvasUrl"          "https://canvas.ucsd.edu/courses/48988"   `mappend`
     defaultContext
 
