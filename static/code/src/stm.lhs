@@ -30,12 +30,12 @@ import Foreign.Marshal.Unsafe (unsafeLocalState)
 2. SHARE it
 3. "lock`"
 
-forkThread :: IO a -> IO () 
+forkThread :: IO a -> IO ()
 
 -- communicate DATA between THREADS
 -- stuff to happen in another thread
 
--- locks --> prevent RACE conditions --> two or more up 
+-- locks --> prevent RACE conditions --> two or more up
 -- SLEEP until stuff happens
 
 
@@ -68,7 +68,7 @@ main0 = do
   print s2
 
 incr :: IORef Int -> IO ()
-incr p = do 
+incr p = do
   n <- readIORef p      --  n  = *p
   writeIORef p (n + 1)  --  *p = n + 1
 \end{code}
@@ -82,22 +82,22 @@ incr p = do
 newtype AccountIO = AIO (IORef Int)
 
 newAccountIO ::  Int -> IO AccountIO
-newAccountIO n = AIO <$> newIORef (max n 0) 
+newAccountIO n = AIO <$> newIORef (max n 0)
 
 showBalanceIO ::  AccountIO -> IO ()
-showBalanceIO (AIO r) = do 
+showBalanceIO (AIO r) = do
   bal <- readIORef r
   putStrLn ("Current Balance: " ++ show bal)
 
 depositIO ::  AccountIO -> Int -> IO ()
-depositIO (AIO r) n = do 
+depositIO (AIO r) n = do
   bal <- readIORef r
   if bal + n < 0
     then putStrLn ("Sorry, cannot withdraw. Balance below " ++ show n)
     else writeIORef r (bal + n)
 
 main1 :: IO ()
-main1 = do 
+main1 = do
   acct <- newAccountIO 0
   forM_ [10, 10, 10, 10, 10] $ \n ->
     forkIO (depositIO acct n)
@@ -115,7 +115,7 @@ A `forever` function that repeats an action ... forever!
 
 \begin{spec}
 forever :: IO a -> IO b
-forever act = do 
+forever act = do
   act
   forever act
 \end{spec}
@@ -123,7 +123,7 @@ forever act = do
 **Exercise:** Can you guess the type of `forever`?
 
 \begin{code}
-main2 = do 
+main2 = do
   hSetBuffering stdout NoBuffering
   forkIO $ forever (putChar 'A') -- thread that writes 'A'
   forkIO $ forever (putChar 'B') -- thread that writes 'B'
@@ -143,11 +143,11 @@ toss       :: Int -> Int -> IO Int
 toss lo hi = getStdRandom (randomR (lo, hi))
 
 pauseRandom :: IO ()
-pauseRandom = do 
+pauseRandom = do
   n <- toss 0 5
   threadDelay (n * oneSec)
 
-main3 = do 
+main3 = do
   hSetBuffering stdout NoBuffering
   forkIO $ forever (putChar 'A' >> pauseRandom) -- thread that writes 'A'
   forkIO $ forever (putChar 'B' >> pauseRandom) -- thread that writes 'B'
@@ -161,19 +161,19 @@ Bank account revisited; depositing with different threads, and fuzzed scheduler
 
 \begin{code}
 depositIO' ::  AccountIO -> Int -> IO ()
-depositIO' (AIO r) n = do 
+depositIO' (AIO r) n = do
   i   <- myThreadId
   bal <- readIORef r
   putStrLn (printf "Thread id = %s deposit's = %d bal = %d" (show i) n bal)
   -- pauseRandom           -- comment out and you get right answer
   if bal + n < 0
     then putStrLn ("Sorry, cannot withdraw. Balance below " ++ show n)
-    else do 
+    else do
       putStrLn (printf "Thread id = %s write bal = %d" (show i) (bal + n))
       writeIORef r (bal + n)
 
 main4 ::  IO ()
-main4 = do 
+main4 = do
   a <- newAccountIO 0
   mapM_ (forkIO . depositIO' a) [10, 10, 10, 10, 10]
   threadDelay (50 * oneSec) -- shutdown after 1 sec
@@ -186,9 +186,9 @@ main4 = do
 
 \begin{spec}
 -- LOCKs
-type Lock = MVar () 
+type Lock = MVar ()
 
-mkLock  :: IO Lock 
+mkLock  :: IO Lock
 mkLock = newMVar ()
 
 lock :: Lock -> IO ()
@@ -197,14 +197,14 @@ lock l = takeMVar l
 unlock  :: Lock -> IO ()
 unlock l = putMVar l ()
 
-synchronize :: Lock -> IO a -> IO a 
+synchronize :: Lock -> IO a -> IO a
 synchronize l action = do
   lock l
-  x <- action 
-  unlock l 
+  x <- action
+  unlock l
   return x
 
-synchronize (l) { 
+synchronize (l) {
   BLOCK
 }
 
@@ -212,26 +212,26 @@ synchronize (l) {
 
 
 -- | "Message box" either has an `a` or is empty
-data MVar a            
+data MVar a
 
 -- | Create an empty MVar
-newEmptyMVar :: IO (MVar a)     
+newEmptyMVar :: IO (MVar a)
 
 -- | Create a FULL reference
-newMVar	 :: a -> IO (MVar a)    
+newMVar	 :: a -> IO (MVar a)
 
 -- | Take *out* the content, block until full
-takeMVar :: MVar a -> IO a 
+takeMVar :: MVar a -> IO a
 
--- | Replace content with new value 
-putMVar	:: MVar a -> a -> IO () 
+-- | Replace content with new value
+putMVar	:: MVar a -> a -> IO ()
 \end{spec}
 
 
 An `MVar` can be used as
 
 1. A **container** for shared mutable state, e.g. common design pattern
-   where threads need *read* and *write* some shared value: Represent the 
+   where threads need *read* and *write* some shared value: Represent the
    state as an ordinary immutable value in an `MVar`.
 
 2. A one-place **message channel**, which can be used for *asynchronous communication*
@@ -254,31 +254,31 @@ newAccountMV :: Int -> IO AccountMV
 newAccountMV n = AMV <$> newMVar (max n 0)
 
 readMVar :: MVar a -> IO a
-readMVar r = do 
+readMVar r = do
   x <- takeMVar r     -- read the value ...
   putMVar r x         -- ... and put it back in!
   return x
 
 showBalanceMV ::  AccountMV -> IO ()
-showBalanceMV (AMV r) = do 
+showBalanceMV (AMV r) = do
   bal <- readMVar r
   putStrLn ("Current Balance: " ++ show bal)
 
 depositMV :: AccountMV -> Int -> IO ()
-depositMV (AMV r) n = do 
+depositMV (AMV r) n = do
   bal <- takeMVar r            -- ALL other threads will now be blocked!
   pauseRandom                  -- No matter, you get right answer
   putStrLn $ "Current Balance: " ++ show bal
   if bal + n < 0
-    then do 
+    then do
       putMVar r bal            -- Put the balance back in
       putStrLn ("Cannot withdraw, balance below " ++ show n)
     else putMVar r (bal + n)   -- Put the extra MONEY into the account
 
 main5 :: IO ()
-main5 = do 
+main5 = do
   a <- newAccountMV 0
-  mapM_ (forkIO . depositMV a) [10, 10, 10, 10, 10] 
+  mapM_ (forkIO . depositMV a) [10, 10, 10, 10, 10]
   threadDelay (10 * oneSec)   -- shutdown after 1 sec
   showBalanceMV a             -- should be $50, but why so slow?
 \end{code}
@@ -302,7 +302,7 @@ Function to execute an IO action `async`-hronously
 
 \begin{code}
 async :: IO a -> IO (Async a)
-async action = do 
+async action = do
   m <- newEmptyMVar               -- 1. Make an MVar to save result
   forkIO (do { x <- action; putMVar m x} )   -- 2. Fork a thread that does the work
   return (Async m)                -- 3. Immediately return (possibly empty) MVar
@@ -348,7 +348,7 @@ timeDownload url = do
 Reading ALL the URLs **in sequence** (i.e. a single thread) with `mapM`
 
 \begin{code}
-main6 = do 
+main6 = do
   (_ , time) <- timeit (mapM timeDownload urls)
   printf "TOTAL download time: %.2fs\n" time
 \end{code}
@@ -366,12 +366,12 @@ mapM f (x:xs) = do y  <- f x
 Reading ALL the URLs **asynchronously** with `async`
 
 \begin{code}
-main7 = do 
+main7 = do
   (_, time) <- timeit asyncDownload
   printf "TOTAL download time: %.2fs\n" time
 
 asyncDownload :: IO [()]
-asyncDownload = do 
+asyncDownload = do
   tasks <- mapM (async . timeDownload) urls
   mapM wait tasks
 \end{code}
@@ -381,7 +381,7 @@ lets **generalize** into `asyncMapM`
 
 \begin{code}
 asyncMapM :: (a -> IO b) -> [a] -> IO [b]
-asyncMapM f xs = do 
+asyncMapM f xs = do
   tasks <- mapM (\x -> async (f x)) xs
   mapM wait tasks
 \end{code}
@@ -392,7 +392,7 @@ literally just drop-in replace to get parallelism.
 Reading ALL URLs with `asyncMapM`
 
 \begin{code}
-main8 = do 
+main8 = do
   (_, time) <- timeit (asyncMapM timeDownload urls)
   printf "TOTAL download time: %.2fs\n" time
 \end{code}
@@ -447,7 +447,7 @@ is just a simple Haskell function:
 
 \begin{code}
 synchronize :: Lock -> IO a -> IO a
-synchronize l act = do 
+synchronize l act = do
   acquire l
   x <- act
   release l
@@ -500,7 +500,7 @@ a **single** customer!
 with explicit lock.
 
 \begin{code}
-data AccountL = AL 
+data AccountL = AL
   { money :: IORef Int
   , lock  :: Lock
   }
@@ -510,25 +510,25 @@ Create a new "locked" account
 
 \begin{code}
 newAccountL   :: Int -> IO AccountL
-newAccountL n = do 
+newAccountL n = do
   m <- newIORef n
   l <- newMVar ()
   return (AL m l)
 
 showBalanceL ::  AccountL -> IO ()
-showBalanceL (AL r _) = do 
+showBalanceL (AL r _) = do
   bal <- readIORef r
   putStrLn ("Current Balance: " ++ show bal)
 
 depositL ::  AccountL -> Int -> IO ()
-depositL (AL r _) n = do 
+depositL (AL r _) n = do
   i   <- myThreadId
   bal <- readIORef r
   putStrLn $ printf "Thread id = %s read n = %d bal = %d" (show i) n bal
   pauseRandom           -- comment out and you get right answer
   if bal + n < 0
     then putStrLn $ "Sorry, cannot withdraw. Balance below " ++ show n
-    else do 
+    else do
       putStrLn (printf "Thread id = %s write bal = %d" (show i) (bal + n))
       writeIORef r (bal + n)
 \end{code}
@@ -550,7 +550,7 @@ main10 = do
 
 \begin{code}
 transferL         ::  AccountL -> AccountL -> Int -> IO ()
-transferL a1 a2 n = do 
+transferL a1 a2 n = do
   depositL a1 (0 - n)  -- withdrawn n from a1
   depositL a2 n        -- deposit   n into a2
 \end{code}
@@ -621,19 +621,19 @@ newAccountT ::  Int -> STM AccountT
 newAccountT n = AT <$> newTVar n
 
 showBalanceT ::  AccountT -> IO ()
-showBalanceT (AT r) = do 
+showBalanceT (AT r) = do
   bal <- atomically (readTVar r)
   putStrLn $ "Current Balance: " ++ show bal
 
 depositT ::  AccountT -> Int -> STM ()
-depositT (AT r) n = do 
+depositT (AT r) n = do
   bal <- readTVar r
   if bal + n < 0
     then retry  -- special "abort" action
     else writeTVar r (bal + n)
 
 main11 :: IO ()
-main11 = do 
+main11 = do
   a <- atomically $ newAccountT 0
   asyncMapM (atomically . depositT a) [10,10,10,10,10]
   showBalanceT a   -- should be $50
@@ -646,7 +646,7 @@ Trivial to compose actions without worrying about *deadlock* or *race*
 
 \begin{code}
 transferT         ::  AccountT -> AccountT -> Int -> STM ()
-transferT a1 a2 n = do 
+transferT a1 a2 n = do
   depositT a1 (0 - n) -- withdrawn n from a1
   depositT a2 n       -- deposit   n into a2
 \end{code}
@@ -726,6 +726,6 @@ main12 :: IO ()
 main12 = do
   a1 <- newAccountL 1000                                            -- create the account
   a2 <- newAccountL 2000
-  asyncs [syncTransfer a1 a2 500, syncTransfer a2 a1 400] 
+  asyncs [syncTransfer a1 a2 500, syncTransfer a2 a1 400]
   return ()
 \end{code}

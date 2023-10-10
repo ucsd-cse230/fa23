@@ -1,5 +1,0 @@
-resolver: lts-20.1
-allow-newer: true
-packages:
-- '.'
-

@@ -12,8 +12,8 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | **Date**   | **Topic**                       | **Notes**                 | **Markup**           | **Code**           |
 |:----------:|:--------------------------------|:--------------------------|:---------------------|:-------------------|
 | *9/28*     | Intro                           | [pdf][00-intro]           |                      |                    |
-|            | Lambda Calculus                 | [html][01-lambda]         | [pdf][01-lambda-pdf] |                    |
-| *10/10*    | Haskell Basics                  | [html][02-hs-basic]       |                      | [code][code-10-10] 
+|            | Lambda Calculus                 | [html][01-lambda]         |                      |                    |
+| *10/10*    | Haskell Basics                  | [html][02-hs-basic]       |                      | [code][code-10-10]
 <!--
 |            | ""                              |                           | [pdf][01-lambda-C]   |                    |
 |            | ""                              |                           | [pdf][01-lambda-D]   | [code][code-10-5]  |
@@ -48,6 +48,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [code]: https://github.com/ucsd-cse230/fa23/tree/master/static/code/src
 [00-intro]: static/raw/lec-intro.pdf
 [01-lambda]: lectures/01-lambda.html
+[02-hs-basic]: lectures/02-haskell-basic.html
 [01-haskell]: static/raw/lec-haskell.pdf
 [01-lambda-A]: static/raw/01-lambda-A.pdf
 [01-lambda-B]: static/raw/01-lambda-B.pdf

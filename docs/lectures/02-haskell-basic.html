@@ -279,6 +279,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br>
 <br></p>
 <h2 id="computation-via-substituting-equals-by-equals-1">Computation via Substituting Equals by Equals</h2>
+<p><br>
+<br></p>
 <p><strong>Equality-Substitution</strong> enables <strong>Abstraction</strong> via <strong>Pattern Recognition</strong></p>
 <p><br>
 <br>
@@ -296,9 +298,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                <span class="dv">70</span> <span class="op">*</span> (<span class="dv">12</span> <span class="op">+</span> <span class="dv">95</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="dv">90</span> <span class="op">*</span> (<span class="dv">68</span> <span class="op">+</span> <span class="dv">12</span>)</span></code></pre></div>
 <p><strong>Recognize Pattern as <span class="math inline"><em>λ</em></span>-function</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pat <span class="ot">=</span> \x y z <span class="ot">-&gt;</span> x  <span class="op">*</span> ( y <span class="op">+</span> z ) </span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pat <span class="ot">=</span> \x y z <span class="ot">-&gt;</span> x  <span class="op">*</span> ( y <span class="op">+</span> z )</span></code></pre></div>
 <p><strong>Equivalent Haskell Definition</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pat   x y z <span class="ot">=</span>  x  <span class="op">*</span> ( y <span class="op">+</span> z ) </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pat   x y z <span class="ot">=</span>  x  <span class="op">*</span> ( y <span class="op">+</span> z )</span></code></pre></div>
 <p><strong>Function Call is Pattern Instance</strong></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pat <span class="dv">31</span> <span class="dv">42</span> <span class="dv">56</span> <span class="op">=*&gt;</span> <span class="dv">31</span> <span class="op">*</span> (<span class="dv">42</span> <span class="op">+</span> <span class="dv">56</span>) <span class="op">=*&gt;</span> <span class="dv">31</span> <span class="op">*</span> <span class="dv">98</span>  <span class="op">=*&gt;</span> <span class="dv">3038</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pat <span class="dv">70</span> <span class="dv">12</span> <span class="dv">95</span> <span class="op">=*&gt;</span> <span class="dv">70</span> <span class="op">*</span> (<span class="dv">12</span> <span class="op">+</span> <span class="dv">95</span>) <span class="op">=*&gt;</span> <span class="dv">70</span> <span class="op">*</span> <span class="dv">107</span> <span class="op">=*&gt;</span> <span class="dv">7490</span></span>
@@ -333,7 +335,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>Every <em>valid</em> expression has a <strong>type</strong> (determined at compile-time)</li>
 <li>Every <em>valid</em> expression reduces to a <em>value</em> (computed at run-time)</li>
 </ul>
-<p>Ill-typed* expressions are rejected at <em>compile-time</em> before execution</p>
+<p><strong>Ill-typed</strong> expressions are rejected at <em>compile-time</em> before execution</p>
 <ul>
 <li><em>like</em> in Java</li>
 <li><em>not like</em> <span class="math inline"><em>λ</em></span>-calculus or Python …</li>
@@ -364,7 +366,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">$</span> stack ghci</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>load file<span class="op">.</span>hs</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">:</span><span class="kw">type</span> expression </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">:</span><span class="kw">type</span> expression</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>info variable</span></code></pre></div>
 <p><br>
 <br>
@@ -404,13 +406,13 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ot">ex2 ::</span> <span class="dt">Double</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">=</span> <span class="dv">3</span> <span class="op">*</span> (<span class="fl">4.2</span> <span class="op">+</span> <span class="fl">5.6</span>)  <span class="co">-- arithmetic operators &quot;overloaded&quot;</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ot">ex3 ::</span> <span class="dt">Char</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ot">ex3 ::</span> <span class="dt">Char</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ex3 <span class="ot">=</span> <span class="ch">'a'</span>              <span class="co">-- 'a', 'b', 'c', etc. built-in `Char` values</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ot">ex4 ::</span> <span class="dt">Bool</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ot">ex4 ::</span> <span class="dt">Bool</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ex4 <span class="ot">=</span> <span class="dt">True</span>             <span class="co">-- True, False are builtin Bool values</span></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ot">ex5 ::</span> <span class="dt">Bool</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ot">ex5 ::</span> <span class="dt">Bool</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>ex5 <span class="ot">=</span> <span class="dt">False</span></span></code></pre></div>
 <p><br>
 <br>
@@ -428,7 +430,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ex7 <span class="ot">=</span> <span class="dv">4</span> <span class="op">*</span> <span class="dv">5</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ot">ex8 ::</span> <span class="dt">Bool</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ex8 <span class="ot">=</span> <span class="dv">5</span> <span class="op">&gt;</span> <span class="dv">4</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ex8 <span class="ot">=</span> <span class="dv">5</span> <span class="op">&gt;</span> <span class="dv">4</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ot">quiz ::</span> <span class="op">???</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>quiz <span class="ot">=</span> <span class="kw">if</span> ex8 <span class="kw">then</span> ex6 <span class="kw">else</span> ex7</span></code></pre></div>
@@ -452,7 +454,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ex7 <span class="ot">=</span> <span class="dv">4</span> <span class="op">*</span> <span class="dv">5</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ot">ex8 ::</span> <span class="dt">Bool</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ex8 <span class="ot">=</span> <span class="dv">5</span> <span class="op">&gt;</span> <span class="dv">4</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ex8 <span class="ot">=</span> <span class="dv">5</span> <span class="op">&gt;</span> <span class="dv">4</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ot">quiz ::</span> <span class="op">???</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>quiz <span class="ot">=</span> <span class="kw">if</span> ex8 <span class="kw">then</span> ex6 <span class="kw">else</span> ex7</span></code></pre></div>
@@ -535,7 +537,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>e1 e2</span></code></pre></div>
 <p>where <code class="sourceCode haskell">e1</code> is a function and <code class="sourceCode haskell">e2</code> is the argument. For example</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> isPos <span class="dv">12</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">True</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">True</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> isPos (<span class="dv">0</span> <span class="op">-</span> <span class="dv">5</span>)</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="dt">False</span></span></code></pre></div>
@@ -551,7 +553,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>With multiple arguments, just pass them in one by one, e.g.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(((e e1) e2) e3)</span></code></pre></div>
 <p>For example</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> pat <span class="dv">31</span> <span class="dv">42</span> <span class="dv">56</span> </span>
+<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> pat <span class="dv">31</span> <span class="dv">42</span> <span class="dv">56</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3038</span></span></code></pre></div>
 <p><br>
 <br>
@@ -593,10 +595,10 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(<span class="dt">T1</span>,<span class="op">...</span>, <span class="dt">Tn</span>)</span></code></pre></div>
 <p>For example</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ot">tup1 ::</span> <span class="op">???</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>tup1 <span class="ot">=</span> (<span class="ch">'a'</span>, <span class="dv">5</span>) </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>tup1 <span class="ot">=</span> (<span class="ch">'a'</span>, <span class="dv">5</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ot">tup2 ::</span> (<span class="dt">Char</span>, <span class="dt">Double</span>, <span class="dt">Int</span>)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>tup2 <span class="ot">=</span> (<span class="ch">'a'</span>, <span class="fl">5.2</span>, <span class="dv">7</span>) </span></code></pre></div>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>tup2 <span class="ot">=</span> (<span class="ch">'a'</span>, <span class="fl">5.2</span>, <span class="dv">7</span>)</span></code></pre></div>
 <p><br>
 <br>
 <br>
@@ -646,7 +648,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="quiz-2">QUIZ</h2>
 <p>What is the value of <code class="sourceCode haskell">quiz</code> defined as</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ot">tup2 ::</span> (<span class="dt">Char</span>, <span class="dt">Double</span>, <span class="dt">Int</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>tup2 <span class="ot">=</span> (<span class="ch">'a'</span>, <span class="fl">5.2</span>, <span class="dv">7</span>) </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>tup2 <span class="ot">=</span> (<span class="ch">'a'</span>, <span class="fl">5.2</span>, <span class="dv">7</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="ot">snd3 ::</span> (t1, t2, t3) <span class="ot">-&gt;</span> t2</span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>snd3 (x1, x2, x3) <span class="ot">=</span> x2</span>
@@ -670,10 +672,10 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>[<span class="dt">T</span>]</span></code></pre></div>
 <p>For example</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ot">chars ::</span> [<span class="dt">Char</span>]</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>chars <span class="ot">=</span> [<span class="ch">'a'</span>,<span class="ch">'b'</span>,<span class="ch">'c'</span>] </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>chars <span class="ot">=</span> [<span class="ch">'a'</span>,<span class="ch">'b'</span>,<span class="ch">'c'</span>]</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="ot">ints ::</span> [<span class="dt">Int</span>]</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>ints <span class="ot">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>] </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>ints <span class="ot">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>]</span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="ot">pairs ::</span> [(<span class="dt">Int</span>, <span class="dt">Bool</span>)]</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>pairs <span class="ot">=</span> [(<span class="dv">1</span>,<span class="dt">True</span>),(<span class="dv">2</span>,<span class="dt">False</span>)]</span></code></pre></div>
@@ -688,7 +690,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="quiz-3">QUIZ</h2>
 <p>What is the type of <code class="sourceCode haskell">things</code> defined as</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ot">things ::</span> <span class="op">???</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>things <span class="ot">=</span> [ [<span class="dv">1</span>], [<span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>] ] </span></code></pre></div>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>things <span class="ot">=</span> [ [<span class="dv">1</span>], [<span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>] ]</span></code></pre></div>
 <p><strong>A.</strong> <code class="sourceCode haskell">[<span class="dt">Int</span>]</code></p>
 <p><strong>B.</strong> <code class="sourceCode haskell">([<span class="dt">Int</span>], [<span class="dt">Int</span>], [<span class="dt">Int</span>])</code></p>
 <p><strong>C.</strong> <code class="sourceCode haskell">[(<span class="dt">Int</span>, <span class="dt">Int</span>, <span class="dt">Int</span>)]</code></p>
@@ -722,16 +724,16 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="constructing-lists">Constructing Lists</h2>
 <p>There are two ways to construct lists</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>    []     <span class="co">-- creates an empty list </span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    h<span class="op">:</span>t    <span class="co">-- creates a list with &quot;head&quot; 'h' and &quot;tail&quot; t </span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>    []     <span class="co">-- creates an empty list</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    h<span class="op">:</span>t    <span class="co">-- creates a list with &quot;head&quot; 'h' and &quot;tail&quot; t</span></span></code></pre></div>
 <p>For example</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">3</span> <span class="op">:</span> []</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">3</span>]</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">2</span> <span class="op">:</span> (<span class="dv">3</span> <span class="op">:</span> []) </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">2</span> <span class="op">:</span> (<span class="dv">3</span> <span class="op">:</span> [])</span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">3</span>]</span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span> <span class="op">:</span> (<span class="dv">2</span> <span class="op">:</span> (<span class="dv">3</span> <span class="op">:</span> [])) </span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1</span> <span class="op">:</span> (<span class="dv">2</span> <span class="op">:</span> (<span class="dv">3</span> <span class="op">:</span> []))</span>
 <span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
 <p><strong>Cons Operator</strong> <code class="sourceCode haskell"><span class="op">:</span></code> <strong>is Right Associative</strong></p>
 <p><code class="sourceCode haskell">x1 <span class="op">:</span> x2 <span class="op">:</span> x3 <span class="op">:</span> x4 <span class="op">:</span> t</code> means <code class="sourceCode haskell">x1 <span class="op">:</span> (x2 <span class="op">:</span> (x3 <span class="op">:</span> (x4 <span class="op">:</span> t)))</code></p>
@@ -774,16 +776,16 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ot">clone ::</span> <span class="op">???</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>clone n x <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
 <p>When you are done you should see the following behavior</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> clone <span class="dv">0</span> <span class="st">&quot;cat&quot;</span> </span>
+<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> clone <span class="dv">0</span> <span class="st">&quot;cat&quot;</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>[]</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> clone <span class="dv">1</span> <span class="st">&quot;cat&quot;</span> </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> clone <span class="dv">1</span> <span class="st">&quot;cat&quot;</span></span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>[<span class="st">&quot;cat&quot;</span>]</span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> clone <span class="dv">2</span> <span class="st">&quot;cat&quot;</span> </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> clone <span class="dv">2</span> <span class="st">&quot;cat&quot;</span></span>
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>[<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;cat&quot;</span>]</span>
 <span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> clone <span class="dv">3</span> <span class="st">&quot;cat&quot;</span> </span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> clone <span class="dv">3</span> <span class="st">&quot;cat&quot;</span></span>
 <span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>[<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;cat&quot;</span>]</span>
 <span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> clone <span class="dv">3</span> <span class="dv">100</span></span>
@@ -825,19 +827,19 @@ returns the list of values <code class="sourceCode haskell">[i, i<span class="op
 <div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span><span class="ot"> ::</span> <span class="op">???</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span> i j <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
 <p>When we are done you should get the behavior</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">4</span> <span class="dv">3</span> </span>
+<div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">4</span> <span class="dv">3</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>[]</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">3</span> <span class="dv">3</span> </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">3</span> <span class="dv">3</span></span>
 <span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">3</span>]</span>
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">2</span> <span class="dv">3</span> </span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">2</span> <span class="dv">3</span></span>
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>, <span class="dv">3</span>]</span>
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">1</span> <span class="dv">3</span> </span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">1</span> <span class="dv">3</span></span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
 <span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">0</span> <span class="dv">3</span> </span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="fu">range</span> <span class="dv">0</span> <span class="dv">3</span></span>
 <span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
 <p><br>
 <br>
@@ -878,7 +880,7 @@ returns the list of values <code class="sourceCode haskell">[i, i<span class="op
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> firstElem [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>]</span>
 <span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span></span>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> firstElem [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>] </span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> firstElem [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]</span>
 <span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span></span></code></pre></div>
 <p><br>
 <br>
