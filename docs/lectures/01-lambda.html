@@ -437,12 +437,17 @@ of one of three kinds:</p>
 <br>
 <br></p>
 <h2 id="examples">Examples</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>\x <span class="ot">-&gt;</span> x             <span class="co">-- The &quot;identity function&quot; (id)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                    <span class="co">-- (&quot;for any x compute x&quot;)</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>\x <span class="ot">-&gt;</span> (\y <span class="ot">-&gt;</span> y)     <span class="co">-- A function that returns (id)</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(\x <span class="ot">-&gt;</span> x)             <span class="co">-- The &quot;identity function&quot; (id)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                      <span class="co">-- (&quot;for any x compute x&quot;)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                      <span class="co">-- function(x){ x }</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>\f <span class="ot">-&gt;</span> (f (\x <span class="ot">-&gt;</span> x)) <span class="co">-- A function that applies its argument to id</span></span></code></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>\x <span class="ot">-&gt;</span> (\y <span class="ot">-&gt;</span> y)       <span class="co">-- A function that returns (id)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                      <span class="co">-- function(x) { function(y) { y } }</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>\f <span class="ot">-&gt;</span> (f (\x <span class="ot">-&gt;</span> x))   <span class="co">-- A function that applies its argument to id</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                      <span class="co">-- function(f) { f(function(x) { x }) }</span></span></code></pre></div>
 <p><br>
 <br>
 <br>

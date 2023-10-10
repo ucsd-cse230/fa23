@@ -1,16 +1,16 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.4.
+-- This file has been generated from package.yaml by hpack version 0.35.0.
 --
 -- see: https://github.com/sol/hpack
 
 name:           cse230-code
 version:        0.1.0.0
-homepage:       https://github.com/ucsd-cse230/web#readme
-bug-reports:    https://github.com/ucsd-cse230/web/issues
+homepage:       https://github.com/ucsd-cse230/fa23#readme
+bug-reports:    https://github.com/ucsd-cse230/fa23/issues
 author:         Ranjit Jhala
 maintainer:     jhala@cs.ucsd.edu
-copyright:      2021 Ranjit Jhala
+copyright:      2023 Ranjit Jhala
 license:        MIT
 build-type:     Simple
 extra-source-files:
@@ -18,7 +18,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/ucsd-cse230/web
+  location: https://github.com/ucsd-cse230/fa23
 
 library
   other-modules:

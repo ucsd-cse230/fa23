@@ -7,11 +7,11 @@ thing2 :: Double
 thing2 = 5.1 + 6.9
 
 thing3 :: Bool
-thing3 = True 
+thing3 = True
 
-thing4 = if True then thing1 else 1 + thing1 
+thing4 = if True then thing1 else 1 + thing1
 
--- Tin -> Tout 
+-- Tin -> Tout
 
 foo :: Integer -> Bool
 foo x = x > 0
@@ -25,15 +25,15 @@ l1 = 1:[]
 l2 = 1:(2:[])
 l3 = 1:(2:(3:(5:(6:(7:(7:[]))))))
 
-{- 
+{-
  []
 
- :          
+ :
 
 -}
 
 funky :: [Integer -> Bool]
-funky = [{- foo, bar, baz,-} bizarre] 
+funky = [{- foo, bar, baz,-} bizarre]
 
 fShub = myHead funky
 
@@ -48,14 +48,14 @@ bizarre x = False
 -- False
 
 
-{- 
+{-
 -}
 checkFunny :: Int -> Int -> Bool
 checkFunny x1 x2 = x1 >= x2 * 100
 
 
 quiz :: Integer -> Integer -> Bool
-quiz x y = x + y > 0 
+quiz x y = x + y > 0
 
 quiz10 = quiz 10
 
@@ -90,17 +90,17 @@ three = \f x -> f (f (f x))
 two = \f x -> f (f x)
 
 
-{- 
+{-
 (Tx -> Tx) -> Tx -> Tx
 
 -}
 
 
--- >>> checkFunny 99 1 
--- >>> checkFunny 100 1 
--- >>> checkFunny 101 1 
--- >>> checkFunny 101 2 
--- >>> checkFunny 201 2 
+-- >>> checkFunny 99 1
+-- >>> checkFunny 100 1
+-- >>> checkFunny 101 1
+-- >>> checkFunny 101 2
+-- >>> checkFunny 201 2
 -- False
 
 -- True
@@ -133,23 +133,23 @@ inc x = x + 1
 
 
 clone :: Int -> t -> [t]
-clone 0 _ = [] 
+clone 0 _ = []
 clone n x = x : clone (n-1) x
 
 append :: [a] -> [a] -> [a]
-append []      l2 = l2 
-append (h1:t1) l2 = h1 : append t1 l2 
+append []      l2 = l2
+append (h1:t1) l2 = h1 : append t1 l2
 
 
 myHead :: [a] -> a
 myHead (h:t) = h
 myHead [] = undefined
 
-{- 
+{-
     append (1:2:[]) (3:4:[])
-    ==> 1 : append (2:[]) (3:4:[]) 
-    ==> 1 : 2 : append [] (3:4:[]) 
-    ==> 1 : 2 : 3:4:[] 
+    ==> 1 : append (2:[]) (3:4:[])
+    ==> 1 : 2 : append [] (3:4:[])
+    ==> 1 : 2 : 3:4:[]
 -}
 
 sumList :: [Int] -> Int
@@ -186,7 +186,7 @@ data CuboidT = MkCuboid Double Double Double
 -- True
 
 
-exCirc :: CircleT 
+exCirc :: CircleT
 exCirc = MkCircle 1.1 2.2 3.3
 
 exCuboid :: CuboidT
@@ -206,4 +206,3 @@ volume (MkCuboid l b h) = l * b * h
 
 
 idk = pi
-
