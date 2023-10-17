@@ -1,4 +1,4 @@
-cabal-version: 2.4 
+cabal-version: 2.4
 
 name:           cse230-code
 version:        0.1.0.0
@@ -19,6 +19,8 @@ source-repository head
 library
   other-modules:
       Lec_10_10_23
+      Lec_10_12_23
+      Lec_10_17_23
   hs-source-dirs:
       src
   build-depends:
@@ -44,7 +46,7 @@ executable stm
       Paths_cse230_code
   hs-source-dirs:
       src
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       HTTP
     , QuickCheck

@@ -14,12 +14,10 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *9/28*     | Intro                           | [pdf][00-intro]           |                      |                    |
 |            | Lambda Calculus                 | [html][01-lambda]         |                      |                    |
 | *10/10*    | Haskell Basics                  | [html][02-hs-basic]       |                      | [code][code-10-10]
+| *10/12*    | Algebraic Data Types            | [html][03-hs-types]       |                      | [code][code-10-12] |
+| *10/17*    | Bottling patterns with HOFs     | [html][07-patterns]       |                      | [code][code-10-17] |
 <!--
-|            | ""                              |                           | [pdf][01-lambda-C]   |                    |
-|            | ""                              |                           | [pdf][01-lambda-D]   | [code][code-10-5]  |
-|            | Haskell Basics                  | [html][02-hs-basic]       |                      | [code][code-10-7]  |
-|            | Haskell  Types                  | [html][03-hs-types]       |                      | [code][code-10-12] |
-|            | Bottling patterns with HOFs     | [html][07-patterns]       | [pdf][07-patterns-A] | [code][code-10-14] |
+|            | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][code-10-19] |
 |            | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][code-10-19] |
 |            | Type Classes                    | [html][08-typeclasses]    |                      | [code][code-10-21] |
 |            | Functors and Monads             | [html][09-monads]         |                      | [code][code-10-26] |
@@ -48,7 +46,10 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [code]: https://github.com/ucsd-cse230/fa23/tree/master/static/code/src
 [00-intro]: static/raw/lec-intro.pdf
 [01-lambda]: lectures/01-lambda.html
-[02-hs-basic]: lectures/02-haskell-basic.html
+[02-basic]: lectures/02-basic.html
+[03-adt]: lectures/03-adt.html
+[04-hof]: lectures/04-hof.html
+
 [01-haskell]: static/raw/lec-haskell.pdf
 [01-lambda-A]: static/raw/01-lambda-A.pdf
 [01-lambda-B]: static/raw/01-lambda-B.pdf
@@ -56,4 +57,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [01-lambda-D]: static/raw/01-lambda-D.pdf
 [07-patterns-A]: static/raw/07-patterns-A.pdf
 [11-state-A]: static/raw/11-state-A.pdf
-[code-10-10]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_10.hs
+[code-10-10]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_10_23.hs
+[code-10-12]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_12_23.hs
+[code-10-17]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_17_23.hs
+
