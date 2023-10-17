@@ -3,6 +3,7 @@ title: Lecture Notes
 headerImg: books.jpg
 ---
 
+
 ## Videos
 
 The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/courses/29526)
