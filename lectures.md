@@ -15,7 +15,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 |            | Lambda Calculus                 | [html][01-lambda]         |                      |                    |
 | *10/10*    | Haskell Basics                  | [html][02-basic]          |                      | [code][code-10-10]
 | *10/12*    | Algebraic Data Types            | [html][03-adt]            |                      | [code][code-10-12] |
-| *10/17*    | Higher-order Functions          | [html][04-hof]            |                      | [code][code-10-17] |
+| *10/17*    | Higher-order Fun                | [html][04-hof]            |                      | [code][code-10-17] |
 <!--
 |            | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][code-10-19] |
 |            | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][code-10-19] |
