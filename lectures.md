@@ -17,6 +17,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/10*    | Haskell Basics                  | [html][02-basic]          |                      | [code][code-10-10]
 | *10/12*    | Algebraic Data Types            | [html][03-adt]            |                      | [code][code-10-12] |
 | *10/17*    | Higher-order Fun                | [html][04-hof]            |                      | [code][code-10-17] |
+| *10/19*    | IO                              | [html][05-io]             |                      | [code][code-10-19] |
 
 <!--
 |            | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][code-10-19] |
@@ -51,6 +52,9 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [02-basic]: lectures/02-basic.html
 [03-adt]: lectures/03-adt.html
 [04-hof]: lectures/04-hof.html
+[05-io]: lectures/05-io.html
+
+
 
 [01-haskell]: static/raw/lec-haskell.pdf
 [01-lambda-A]: static/raw/01-lambda-A.pdf
@@ -62,4 +66,5 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [code-10-10]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_10_23.hs
 [code-10-12]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_12_23.hs
 [code-10-17]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_17_23.hs
+[code-10-19]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/hello.hs
 
