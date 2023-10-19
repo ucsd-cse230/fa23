@@ -1,4 +1,7 @@
-module Hello where
+module Main where
+
+main :: IO ()
+main = putStrLn "hello, world!" 
 
 thing1 :: Integer
 thing1 = 2 
