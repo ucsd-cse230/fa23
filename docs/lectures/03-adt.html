@@ -213,7 +213,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Haskell Crash Course Part II</h1>
+                    <h1>Haskell Crash Course II -- Data Types</h1>
                     
                     <span class="meta">
 		    
@@ -330,19 +330,19 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="using-type-synonyms">Using Type Synonyms</h2>
 <p>We can now use synonyms by creating values of the given types</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">circ0 ::</span> <span class="dt">Circle</span> </span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">circ0 ::</span> <span class="dt">Circle</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>circ0 <span class="ot">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">100</span>)  <span class="co">-- ^ circle at &quot;origin&quot; with radius 100</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ot">cub0 ::</span> <span class="dt">Cuboid</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>cub0 <span class="ot">=</span> (<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)  <span class="co">-- ^ cuboid with length=10, depth=20, height=30 </span></span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>cub0 <span class="ot">=</span> (<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)  <span class="co">-- ^ cuboid with length=10, depth=20, height=30</span></span></code></pre></div>
 <p>And we can write functions over synonyms too</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ot">area ::</span> <span class="dt">Circle</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>area (x, y, r) <span class="ot">=</span> <span class="fu">pi</span> <span class="op">*</span> r <span class="op">*</span> r  </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>area (x, y, r) <span class="ot">=</span> <span class="fu">pi</span> <span class="op">*</span> r <span class="op">*</span> r</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ot">volume ::</span> <span class="dt">Cuboid</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>volume (l, d, h) <span class="ot">=</span> l <span class="op">*</span> d <span class="op">*</span> h </span></code></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>volume (l, d, h) <span class="ot">=</span> l <span class="op">*</span> d <span class="op">*</span> h</span></code></pre></div>
 <p>We should get this behavior</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> area circ0 </span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> area circ0</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fl">31415.926535897932</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> volume cub0</span>
@@ -361,14 +361,14 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> <span class="dt">Circle</span> <span class="ot">=</span> (<span class="dt">Double</span>, <span class="dt">Double</span>, <span class="dt">Double</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> <span class="dt">Cuboid</span> <span class="ot">=</span> (<span class="dt">Double</span>, <span class="dt">Double</span>, <span class="dt">Double</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ot">circ0 ::</span> <span class="dt">Circle</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ot">circ0 ::</span> <span class="dt">Circle</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>circ0 <span class="ot">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">100</span>)  <span class="co">-- ^ circle at &quot;origin&quot; with radius 100</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ot">cub0 ::</span> <span class="dt">Cuboid</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>cub0 <span class="ot">=</span> (<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)  <span class="co">-- ^ cuboid with length=10, depth=20, height=30 </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>cub0 <span class="ot">=</span> (<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)  <span class="co">-- ^ cuboid with length=10, depth=20, height=30</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ot">area ::</span> <span class="dt">Circle</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>area (x, y, r) <span class="ot">=</span> <span class="fu">pi</span> <span class="op">*</span> r <span class="op">*</span> r  </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>area (x, y, r) <span class="ot">=</span> <span class="fu">pi</span> <span class="op">*</span> r <span class="op">*</span> r</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="ot">volume ::</span> <span class="dt">Cuboid</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>volume (l, d, h) <span class="ot">=</span> l <span class="op">*</span> d <span class="op">*</span> h</span></code></pre></div>
@@ -407,7 +407,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="creating-new-data-types">Creating <em>New</em> Data Types</h2>
 <p>We can avoid mixing up by creating <em>new</em> <code class="sourceCode haskell"><span class="kw">data</span></code> types</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- | A new type `CircleT` with constructor `MkCircle`</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">CircleT</span> <span class="ot">=</span> <span class="dt">MkCircle</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span>     </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">CircleT</span> <span class="ot">=</span> <span class="dt">MkCircle</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- | A new type `CuboidT` with constructor `MkCuboid`</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">CuboidT</span> <span class="ot">=</span> <span class="dt">MkCuboid</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span></span></code></pre></div>
@@ -428,7 +428,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="quiz-1">QUIZ</h2>
 <p>Suppose we create a new type with a <code class="sourceCode haskell"><span class="kw">data</span></code> definition</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- | A new type `CircleT` with constructor `MkCircle`</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">CircleT</span> <span class="ot">=</span> <span class="dt">MkCircle</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span>     </span></code></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">CircleT</span> <span class="ot">=</span> <span class="dt">MkCircle</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span></span></code></pre></div>
 <p>What is the <strong>type of</strong> the <code class="sourceCode haskell"><span class="dt">MkCircle</span></code> <em>constructor</em>?</p>
 <p><strong>A.</strong> <code class="sourceCode haskell"><span class="dt">MkCircle</span><span class="ot"> ::</span> <span class="dt">CircleT</span></code></p>
 <p><strong>B.</strong> <code class="sourceCode haskell"><span class="dt">MkCircle</span><span class="ot"> ::</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">CircleT</span></code></p>
@@ -446,11 +446,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="constructing-data">Constructing Data</h2>
 <p>Constructors let us <em>build</em> values of the new type</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ot">circ1 ::</span> <span class="dt">CircleT</span> </span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ot">circ1 ::</span> <span class="dt">CircleT</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>circ1 <span class="ot">=</span> <span class="dt">MkCircle</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">100</span>  <span class="co">-- ^ circle at &quot;origin&quot; w/ radius 100</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ot">cub1 ::</span> <span class="dt">Cuboid</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>cub1 <span class="ot">=</span> <span class="dt">MkCuboid</span> <span class="dv">10</span> <span class="dv">20</span> <span class="dv">30</span>  <span class="co">-- ^ cuboid w/ len=10, dep=20, ht=30 </span></span></code></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>cub1 <span class="ot">=</span> <span class="dt">MkCuboid</span> <span class="dv">10</span> <span class="dv">20</span> <span class="dv">30</span>  <span class="co">-- ^ cuboid w/ len=10, dep=20, ht=30</span></span></code></pre></div>
 <p><br>
 <br>
 <br>
@@ -462,7 +462,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="quiz-2">QUIZ</h2>
 <p>Suppose we have the definitions</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">CuboidT</span> <span class="ot">=</span> <span class="dt">MkCuboid</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span>     </span>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">CuboidT</span> <span class="ot">=</span> <span class="dt">MkCuboid</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> <span class="dt">Cuboid</span>  <span class="ot">=</span> (<span class="dt">Double</span>, <span class="dt">Double</span>, <span class="dt">Double</span>)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -520,11 +520,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="pattern-matching-on-function-inputs">Pattern matching on Function Inputs</h2>
 <p>Very common to do matching on function inputs</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ot">volume ::</span> <span class="dt">Cuboid</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>volume c <span class="ot">=</span> <span class="kw">case</span> c <span class="kw">of</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>volume c <span class="ot">=</span> <span class="kw">case</span> c <span class="kw">of</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>            <span class="dt">MkCuboid</span> l d h <span class="ot">-&gt;</span> l <span class="op">*</span> d <span class="op">*</span> h</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="ot">area ::</span> <span class="dt">Circle</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>area a  <span class="ot">=</span> <span class="kw">case</span> a <span class="kw">of</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>area a  <span class="ot">=</span> <span class="kw">case</span> a <span class="kw">of</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            <span class="dt">MkCircle</span> x y r <span class="ot">-&gt;</span> <span class="fu">pi</span> <span class="op">*</span> r <span class="op">*</span> r</span></code></pre></div>
 <p>So Haskell allows a nicer syntax: <em>patterns in the arguments</em></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ot">volume ::</span> <span class="dt">Cuboid</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></span>
@@ -551,11 +551,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>What is the problem with <code class="sourceCode haskell">shapes</code> as defined below?</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>shapes <span class="ot">=</span> [circ1, cub1]</span></code></pre></div>
 <p>Where we have defined</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ot">circ1 ::</span> <span class="dt">CircleT</span> </span>
+<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ot">circ1 ::</span> <span class="dt">CircleT</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>circ1 <span class="ot">=</span> <span class="dt">MkCircle</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">100</span>  <span class="co">-- ^ circle at &quot;origin&quot; with radius 100</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ot">cub1 ::</span> <span class="dt">Cuboid</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>cub1 <span class="ot">=</span> <span class="dt">MkCuboid</span> <span class="dv">10</span> <span class="dv">20</span> <span class="dv">30</span>  <span class="co">-- ^ cuboid with length=10, depth=20, height=30 </span></span></code></pre></div>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>cub1 <span class="ot">=</span> <span class="dt">MkCuboid</span> <span class="dv">10</span> <span class="dv">20</span> <span class="dv">30</span>  <span class="co">-- ^ cuboid with length=10, depth=20, height=30</span></span></code></pre></div>
 <p><br>
 <br>
 <br>
@@ -580,8 +580,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="quiz-variant-aka-union-types">QUIZ: Variant (aka Union) Types</h2>
 <p>Lets create a <em>single</em> type that can represent <em>both</em> kinds of shapes!</p>
 <p><br></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">MkCircle</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span>   <span class="co">-- ^ Circle at x, y with radius r </span></span>
+<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">MkCircle</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span>   <span class="co">-- ^ Circle at x, y with radius r</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">MkCuboid</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span>   <span class="co">-- ^ Cuboid with length, depth, height</span></span></code></pre></div>
 <p><br></p>
 <p>What is the type of <code class="sourceCode haskell"><span class="dt">MkCircle</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">100</span></code> ?</p>
@@ -596,8 +596,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="each-data-constructor-of-shape-has-a-different-type">Each <em>Data Constructor</em> of <code class="sourceCode haskell"><span class="dt">Shape</span></code> has a different type</h2>
 <p>When we define a data type like the below</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">MkCircle</span>  <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span>   <span class="co">-- ^ Circle at x, y with radius r </span></span>
+<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">MkCircle</span>  <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span>   <span class="co">-- ^ Circle at x, y with radius r</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">MkCuboid</span>  <span class="dt">Double</span> <span class="dt">Double</span> <span class="dt">Double</span>   <span class="co">-- ^ Cuboid with length, depth, height</span></span></code></pre></div>
 <p>We get <em>multiple constructors</em> for <code class="sourceCode haskell"><span class="dt">Shape</span></code></p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">MkCircle</span><span class="ot"> ::</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Shape</span></span>
@@ -607,8 +607,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ot">circ2 ::</span> <span class="dt">Shape</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>circ2 <span class="ot">=</span> <span class="dt">MkCircle</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">100</span>  <span class="co">-- ^ circle at &quot;origin&quot; with radius 100</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ot">cub2 ::</span> <span class="dt">Shape</span> </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>cub2 <span class="ot">=</span> <span class="dt">MkCuboid</span> <span class="dv">10</span> <span class="dv">20</span> <span class="dv">30</span>  <span class="co">-- ^ cuboid with length=10, depth=20, height=30 </span></span></code></pre></div>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ot">cub2 ::</span> <span class="dt">Shape</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>cub2 <span class="ot">=</span> <span class="dt">MkCuboid</span> <span class="dv">10</span> <span class="dv">20</span> <span class="dv">30</span>  <span class="co">-- ^ cuboid with length=10, depth=20, height=30</span></span></code></pre></div>
 <p>and then define collections of <code class="sourceCode haskell"><span class="dt">Shape</span></code>s</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ot">shapes ::</span> [<span class="dt">Shape</span>]</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>shapes <span class="ot">=</span> [circ1, cub1]</span></code></pre></div>
@@ -620,7 +620,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="exercise">EXERCISE</h2>
 <p>Lets define a type for 2D shapes</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape2D</span> </span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape2D</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">MkRect</span> <span class="dt">Double</span> <span class="dt">Double</span> <span class="co">-- ^ 'MkRect w h' is a rectangle with width 'w', height 'h'</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">MkCirc</span> <span class="dt">Double</span>        <span class="co">-- ^ 'MkCirc r' is a circle with radius 'r'</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">MkPoly</span> [<span class="dt">Vertex</span>]      <span class="co">-- ^ 'MkPoly [v1,...,vn]' is a polygon with vertices at 'v1...vn'</span></span>
@@ -637,9 +637,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>You may want to use this helper that computes the area of a triangle at <code class="sourceCode haskell">v1</code>, <code class="sourceCode haskell">v2</code>, <code class="sourceCode haskell">v3</code></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ot">areaTriangle ::</span> <span class="dt">Vertex</span> <span class="ot">-&gt;</span> <span class="dt">Vertex</span> <span class="ot">-&gt;</span> <span class="dt">Vertex</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>areaTriangle v1 v2 v3 <span class="ot">=</span> <span class="fu">sqrt</span> (s <span class="op">*</span> (s <span class="op">-</span> s1) <span class="op">*</span> (s <span class="op">-</span> s2) <span class="op">*</span> (s <span class="op">-</span> s3))</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">where</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">where</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>      s  <span class="ot">=</span> (s1 <span class="op">+</span> s2 <span class="op">+</span> s3) <span class="op">/</span> <span class="dv">2</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>      s1 <span class="ot">=</span> distance v1 v2 </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>      s1 <span class="ot">=</span> distance v1 v2</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>      s2 <span class="ot">=</span> distance v2 v3</span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>      s3 <span class="ot">=</span> distance v3 v1</span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -670,8 +670,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="recap-data-types">Recap: Data Types</h2>
 <p>Recall that Haskell allows you to create brand <a href="03-haskell-types.html">new data types</a></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape</span> </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">MkRect</span>  <span class="dt">Double</span> <span class="dt">Double</span> </span>
+<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">MkRect</span>  <span class="dt">Double</span> <span class="dt">Double</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">MkPoly</span> [(<span class="dt">Double</span>, <span class="dt">Double</span>)]</span></code></pre></div>
 <p><br>
 <br>
@@ -685,8 +685,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="quiz-3">QUIZ</h2>
 <p>What is the type of <code class="sourceCode haskell"><span class="dt">MkRect</span></code> ?</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape</span> </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">MkRect</span>  <span class="dt">Double</span> <span class="dt">Double</span> </span>
+<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Shape</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">MkRect</span>  <span class="dt">Double</span> <span class="dt">Double</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">MkPoly</span> [(<span class="dt">Double</span>, <span class="dt">Double</span>)]</span></code></pre></div>
 <p><strong>a.</strong> <code class="sourceCode haskell"><span class="dt">Shape</span></code></p>
 <p><strong>b.</strong> <code class="sourceCode haskell"><span class="dt">Double</span></code></p>
@@ -727,7 +727,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="recursive-data-types"><em>Recursive</em> Data Types</h2>
 <p>We can define datatypes <em>recursively</em> too</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">IntList</span> </span>
+<div class="sourceCode" id="cb32"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">IntList</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">INil</span>                <span class="co">-- ^ empty list</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">ICons</span> <span class="dt">Int</span> <span class="dt">IntList</span>   <span class="co">-- ^ list with &quot;hd&quot; Int and &quot;tl&quot; IntList</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
@@ -743,7 +743,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br>
 <br></p>
 <h2 id="quiz-4">QUIZ</h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">IntList</span> </span>
+<div class="sourceCode" id="cb33"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">IntList</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">INil</span>                <span class="co">-- ^ empty list</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">ICons</span> <span class="dt">Int</span> <span class="dt">IntList</span>   <span class="co">-- ^ list with &quot;hd&quot; Int and &quot;tl&quot; IntList</span></span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
@@ -765,7 +765,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="constructing-intlist">Constructing <code class="sourceCode haskell"><span class="dt">IntList</span></code></h2>
 <p>Can <em>only</em> build <code class="sourceCode haskell"><span class="dt">IntList</span></code> via constructors.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">:</span><span class="kw">type</span> <span class="dt">INil</span> </span>
+<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">:</span><span class="kw">type</span> <span class="dt">INil</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="dt">INil</span><span class="ot">::</span> <span class="dt">IntList</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">:</span><span class="kw">type</span> <span class="dt">ICons</span></span>
@@ -801,14 +801,14 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="trees-multiple-recursive-occurrences">Trees: Multiple Recursive Occurrences</h2>
 <p>We can represent <code class="sourceCode haskell"><span class="dt">Int</span></code> <em>trees</em> like</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">IntTree</span> </span>
+<div class="sourceCode" id="cb36"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">IntTree</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>   <span class="ot">=</span> <span class="dt">ILeaf</span> <span class="dt">Int</span>              <span class="co">-- ^ single &quot;leaf&quot; w/ an Int</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>   <span class="op">|</span> <span class="dt">INode</span> <span class="dt">IntTree</span> <span class="dt">IntTree</span>  <span class="co">-- ^ internal &quot;node&quot; w/ 2 sub-trees</span></span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
 <p>A <em>leaf</em> is a box containing an <code class="sourceCode haskell"><span class="dt">Int</span></code> tagged <code class="sourceCode haskell"><span class="dt">ILeaf</span></code> e.g.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> it1  <span class="ot">=</span> <span class="dt">ILeaf</span> <span class="dv">1</span> </span>
+<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> it1  <span class="ot">=</span> <span class="dt">ILeaf</span> <span class="dv">1</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> it2  <span class="ot">=</span> <span class="dt">ILeaf</span> <span class="dv">2</span></span></code></pre></div>
-<p>A <em>node</em> is a box containing two sub-trees tagged <code class="sourceCode haskell"><span class="dt">INode</span></code> e.g. </p>
+<p>A <em>node</em> is a box containing two sub-trees tagged <code class="sourceCode haskell"><span class="dt">INode</span></code> e.g.</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> itt   <span class="ot">=</span> <span class="dt">INode</span> (<span class="dt">ILeaf</span> <span class="dv">1</span>) (<span class="dt">ILeaf</span> <span class="dv">2</span>)</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> itt'  <span class="ot">=</span> <span class="dt">INode</span> itt itt</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dt">INode</span> itt' itt'</span>
@@ -825,8 +825,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="multiple-branching-factors">Multiple Branching Factors</h2>
 <p>e.g. <a href="http://en.wikipedia.org/wiki/2-3_tree">2-3 trees</a></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Int23T</span> </span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">ILeaf0</span> </span>
+<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Int23T</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">ILeaf0</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">INode2</span> <span class="dt">Int</span> <span class="dt">Int23T</span> <span class="dt">Int23T</span></span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">INode3</span> <span class="dt">Int</span> <span class="dt">Int23T</span> <span class="dt">Int23T</span> <span class="dt">Int23T</span></span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
@@ -852,12 +852,12 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="parameterized-types">Parameterized Types</h2>
 <p>We can define <code class="sourceCode haskell"><span class="dt">CharList</span></code> or <code class="sourceCode haskell"><span class="dt">DoubleList</span></code>
 - versions of <code class="sourceCode haskell"><span class="dt">IntList</span></code> for <code class="sourceCode haskell"><span class="dt">Char</span></code> and <code class="sourceCode haskell"><span class="dt">Double</span></code> as</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">CharList</span> </span>
+<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">CharList</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">CNil</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">CCons</span> <span class="dt">Char</span> <span class="dt">CharList</span></span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span>
 <span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">DoubleList</span> </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">DoubleList</span></span>
 <span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>   <span class="ot">=</span> <span class="dt">DNil</span></span>
 <span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>   <span class="op">|</span> <span class="dt">DCons</span> <span class="dt">Char</span> <span class="dt">DoubleList</span></span>
 <span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>   <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
@@ -917,19 +917,19 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="polymorphic-data-has-polymorphic-constructors">Polymorphic Data has Polymorphic Constructors</h2>
 <p>Look at the types of the constructors</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">:</span><span class="kw">type</span> <span class="dt">Nil</span> </span>
+<div class="sourceCode" id="cb45"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">:</span><span class="kw">type</span> <span class="dt">Nil</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Nil</span><span class="ot"> ::</span> <span class="dt">List</span> a</span></code></pre></div>
 <p>That is, the <code class="sourceCode haskell"><span class="dt">Empty</span></code> tag is a value of <em>any</em> kind of list, and</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">:</span><span class="kw">type</span> <span class="dt">Cons</span> </span>
+<div class="sourceCode" id="cb46"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">:</span><span class="kw">type</span> <span class="dt">Cons</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Cons</span><span class="ot"> ::</span> a <span class="ot">-&gt;</span> <span class="dt">List</span> a <span class="ot">-&gt;</span> <span class="dt">List</span> a</span></code></pre></div>
 <p><code class="sourceCode haskell"><span class="dt">Cons</span></code> takes an <code class="sourceCode haskell">a</code> <em>and</em> a <code class="sourceCode haskell"><span class="dt">List</span> a</code> and returns a <code class="sourceCode haskell"><span class="dt">List</span> a</code>.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ot">cList ::</span> <span class="dt">List</span> <span class="dt">Char</span>     <span class="co">-- list where 'a' = 'Char' </span></span>
+<div class="sourceCode" id="cb47"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ot">cList ::</span> <span class="dt">List</span> <span class="dt">Char</span>     <span class="co">-- list where 'a' = 'Char'</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>cList <span class="ot">=</span> <span class="dt">Cons</span> <span class="ch">'a'</span> (<span class="dt">Cons</span> <span class="ch">'b'</span> (<span class="dt">Cons</span> <span class="ch">'c'</span> <span class="dt">Nil</span>))</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="ot">iList ::</span> <span class="dt">List</span> <span class="dt">Int</span>      <span class="co">-- list where 'a' = 'Int' </span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="ot">iList ::</span> <span class="dt">List</span> <span class="dt">Int</span>      <span class="co">-- list where 'a' = 'Int'</span></span>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>iList <span class="ot">=</span> <span class="dt">Cons</span> <span class="dv">1</span> (<span class="dt">Cons</span> <span class="dv">2</span> (<span class="dt">Cons</span> <span class="dv">3</span> <span class="dt">Nil</span>))</span>
 <span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="ot">dList ::</span> <span class="dt">List</span> <span class="dt">Double</span>   <span class="co">-- list where 'a' = 'Double' </span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="ot">dList ::</span> <span class="dt">List</span> <span class="dt">Double</span>   <span class="co">-- list where 'a' = 'Double'</span></span>
 <span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>dList <span class="ot">=</span> <span class="dt">Cons</span> <span class="fl">1.1</span> (<span class="dt">Cons</span> <span class="fl">2.2</span> (<span class="dt">Cons</span> <span class="fl">3.3</span> <span class="dt">Nil</span>))</span></code></pre></div>
 <p><br>
 <br>
@@ -956,7 +956,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <ul>
 <li>we can call <code class="sourceCode haskell">len</code> on <strong>any kind of list</strong>.</li>
 </ul>
-<div class="sourceCode" id="cb49"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> len [<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>, <span class="fl">4.4</span>]    <span class="co">-- a := Double  </span></span>
+<div class="sourceCode" id="cb49"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> len [<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>, <span class="fl">4.4</span>]    <span class="co">-- a := Double</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> len <span class="st">&quot;mmm donuts!&quot;</span>           <span class="co">-- a := Char</span></span>
@@ -1008,13 +1008,13 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="generalizing-other-data-types">Generalizing Other Data Types</h2>
 <p>Polymorphic trees</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Tree</span> a </span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>   <span class="ot">=</span> <span class="dt">Leaf</span> a </span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>   <span class="op">|</span> <span class="dt">Node</span> (<span class="dt">Tree</span> a) (<span class="dt">Tree</span> a) </span>
+<div class="sourceCode" id="cb52"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Tree</span> a</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>   <span class="ot">=</span> <span class="dt">Leaf</span> a</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>   <span class="op">|</span> <span class="dt">Node</span> (<span class="dt">Tree</span> a) (<span class="dt">Tree</span> a)</span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
 <p>Polymorphic <em>2-3</em> trees</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Tree23</span> a </span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>   <span class="ot">=</span> <span class="dt">Leaf0</span>  </span>
+<div class="sourceCode" id="cb53"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Tree23</span> a</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>   <span class="ot">=</span> <span class="dt">Leaf0</span></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>   <span class="op">|</span> <span class="dt">Node2</span> (<span class="dt">Tree23</span> a) (<span class="dt">Tree23</span> a)</span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>   <span class="op">|</span> <span class="dt">Node3</span> (<span class="dt">Tree23</span> a) (<span class="dt">Tree23</span> a) (<span class="dt">Tree23</span> a)</span>
 <span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>   <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
@@ -1067,7 +1067,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br></p>
 <h2 id="quiz-5">QUIZ</h2>
 <p>What is the <em>kind</em> of <code class="sourceCode haskell"><span class="ot">-&gt;</span></code>? That, is what does GHCi say if we type</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">:</span>kind (<span class="ot">-&gt;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="op">:</span>kind (<span class="ot">-&gt;</span>)</span></code></pre></div>
 <p><strong>A.</strong> <code class="sourceCode haskell"><span class="op">*</span></code></p>
 <p><strong>B.</strong> <code class="sourceCode haskell"><span class="op">*</span> <span class="ot">-&gt;</span> <span class="op">*</span></code></p>
 <p><strong>C.</strong> <code class="sourceCode haskell"><span class="op">*</span> <span class="ot">-&gt;</span> <span class="op">*</span> <span class="ot">-&gt;</span> <span class="op">*</span></code></p>

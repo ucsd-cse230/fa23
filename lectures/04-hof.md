@@ -1,9 +1,9 @@
 ---
-title: Bottling Computation Patterns
+title: Haskell Crash Course III -- Higher-Order Functions
 headerImg: sea.jpg
 ---
 
-## Polymorphism and Equational Abstractions are the Secret Sauce 
+## Polymorphism and Equational Abstractions are the Secret Sauce
 
 **Refactor** arbitrary *repeated* code patterns ...
 
@@ -22,7 +22,7 @@ headerImg: sea.jpg
 
 ## EXERCISE: Iteration
 
-Write a function that *squares* a list of `Int` 
+Write a function that *squares* a list of `Int`
 
 ```haskell
 squares :: [Int] -> [Int]
@@ -78,7 +78,7 @@ shout = ???
 
 ## Iteration
 
-Common strategy: *iteratively* transform *each element* of input list 
+Common strategy: *iteratively* transform *each element* of input list
 
 Like humans and monkeys, `shout` and `squares` [share 93% of their DNA][3]
 
@@ -103,11 +103,11 @@ Remember D.R.Y. (Don't repeat yourself)
 
 ```haskell
 -- rename 'squares' to 'foo'
-foo []     = [] 
+foo []     = []
 foo (x:xs) = (x * x)     : foo xs
 
 -- rename 'shout' to 'foo'
-foo []     = [] 
+foo []     = []
 foo (x:xs) = (toUpper x) : foo xs
 ```
 
@@ -119,17 +119,17 @@ foo (x:xs) = (toUpper x) : foo xs
 
 **Step 3** Make *differences* a parameter
 
-- Make *transform* a parameter `f` 
+- Make *transform* a parameter `f`
 
 ```haskell
-foo f []     = [] 
+foo f []     = []
 foo f (x:xs) = (f x) : foo f xs
 ```
 
-**Done** We have *bottled* the computation pattern as `foo` (aka `map`) 
+**Done** We have *bottled* the computation pattern as `foo` (aka `map`)
 
 ```haskell
-map f []     = [] 
+map f []     = []
 map f (x:xs) = (f x) : map f xs
 ```
 
@@ -149,13 +149,13 @@ map f (x:xs) = (f x) : map f xs
 <br>
 
 
-## QUIZ 
+## QUIZ
 
 What is the type of `map` ?
 
 ```haskell
 map :: ???
-map f []     = [] 
+map f []     = []
 map f (x:xs) = (f x) : map f xs
 ```
 
@@ -187,14 +187,14 @@ map f (x:xs) = (f x) : map f xs
 map :: (a -> b) -> [a] -> [b]
 ```
 
-That is, `map` takes two inputs 
+That is, `map` takes two inputs
 
-- a *transformer* of type `a -> b` 
+- a *transformer* of type `a -> b`
 - a *list* of values `[a]`
 
 and it returns as output
 
-- a list of values `[b]` 
+- a list of values `[b]`
 
 that can only come by applying `f` to each element of the input list.
 
@@ -211,7 +211,7 @@ that can only come by applying `f` to each element of the input list.
 
 Lets reuse the pattern by *instantiating* the transformer
 
-### `shout` 
+### `shout`
 
 ```haskell
 -- OLD with recursion
@@ -222,9 +222,9 @@ shout (x:xs) = Char.toUpper x : shout xs
 -- NEW with map
 shout :: [Char] -> [Char]
 shout xs = map (???) xs
-``` 
+```
 
-### `squares` 
+### `squares`
 
 ```haskell
 -- OLD with recursion
@@ -234,8 +234,8 @@ squares (x:xs) = (x * x) : squares xs
 
 -- NEW with map
 squares :: [Int] -> [Int]
-squares xs = map (???) xs 
-``` 
+squares xs = map (???) xs
+```
 
 <br>
 <br>
@@ -258,10 +258,10 @@ Use `map` to write a function
 
 ```haskell
 total :: [Score] -> [Int]
-total xs = map (???) xs 
+total xs = map (???) xs
 ```
 
-such that 
+such that
 
 ```haskell
 >>> total [(10, 20), (15, 5), (21, 22), (14, 16)]
@@ -285,7 +285,7 @@ such that
 <br>
 <br>
 
-## The Case of the Missing Parameter 
+## The Case of the Missing Parameter
 
 Note that we can write `shout` like this
 
@@ -308,7 +308,7 @@ Huh. No parameters? Can someone explain?
 <br>
 <br>
 
-## The Case of the Missing Parameter 
+## The Case of the Missing Parameter
 
 In Haskell, the following all mean the same thing
 
@@ -324,22 +324,22 @@ Now the following all *mean the same thing*
 ```haskell
 plus x y = add x y
 plus x   = add x
-plus     = add 
+plus     = add
 ```
 
-Why? *equational reasoning!* In general 
+Why? *equational reasoning!* In general
 
 ```haskell
 foo x = e x
 
--- is equivalent to 
+-- is equivalent to
 
 foo   = e
 ```
 
-as long as `x` doesn't appear in `e`. 
+as long as `x` doesn't appear in `e`.
 
-Thus, to save some typing, we *omit* the extra parameter. 
+Thus, to save some typing, we *omit* the extra parameter.
 
 <br>
 <br>
@@ -368,7 +368,7 @@ Next, a function that *concatenates* the `String`s in a list
 
 ```haskell
 catList :: [String] -> String
-catList []     = "" 
+catList []     = ""
 catList (x:xs) = x ++ (catList xs)
 ```
 
@@ -392,7 +392,7 @@ catList (x:xs) = x ++ (catList xs)
 foo []     = 0
 foo (x:xs) = x + foo xs
 
-foo []     = "" 
+foo []     = ""
 foo (x:xs) = x ++ foo xs
 ```
 
@@ -437,7 +437,7 @@ Can you figure out how `sumList` and `catList` are just *instances* of `foldr`?
 sumList :: [Int] -> Int
 sumList xs = foldr (?op) (?base) xs
 
-catList :: [String] -> String 
+catList :: [String] -> String
 catList xs = foldr (?op) (?base) xs
 ```
 
@@ -454,35 +454,35 @@ catList xs = foldr (?op) (?base) xs
 <br>
 
 
-## Executing `foldr` 
+## Executing `foldr`
 
 To develop some intuition about `foldr` lets "run" it a few times by hand.
 
 ```haskell
 foldr op b (a1:a2:a3:a4:[])
-==> 
+==>
   a1 `op` (foldr op b (a2:a3:a4:[]))
-==> 
+==>
   a1 `op` (a2 `op` (foldr op b (a3:a4:[])))
-==> 
+==>
   a1 `op` (a2 `op` (a3 `op` (foldr op b (a4:[]))))
-==> 
+==>
   a1 `op` (a2 `op` (a3 `op` (a4 `op` foldr op b [])))
-==> 
+==>
   a1 `op` (a2 `op` (a3 `op` (a4 `op` b)))
 ```
 
 Look how it *mirrors* the structure of lists!
 
-- `(:)` is replaced by `op` 
+- `(:)` is replaced by `op`
 - `[]` is replaced by `base`
 
-So 
+So
 
 ```haskell
 foldr (+) 0 (x1:x2:x3:x4:[])
 ==> x1 + (x2 + (x3 + (x4 + 0))
-``` 
+```
 
 <br>
 <br>
@@ -496,7 +496,7 @@ foldr (+) 0 (x1:x2:x3:x4:[])
 <br>
 <br>
 
-## Typing `foldr` 
+## Typing `foldr`
 
 ```haskell
 foldr :: (a -> b -> b) -> b -> [a] -> b
@@ -504,7 +504,7 @@ foldr op base []     = base
 foldr op base (x:xs) = op x (foldr op base xs)
 ```
 
-`foldr` takes as input 
+`foldr` takes as input
 
 - a *reducer* function of type `a -> b -> b`
 - a *base* value of type `b`
@@ -574,7 +574,7 @@ but can also write this
 
 ```haskell
 foldr :: (a -> b -> b) -> b -> [a] -> b
-foldr op base  = go 
+foldr op base  = go
   where
      go []     = base
      go (x:xs) = op x (go xs)
@@ -594,13 +594,13 @@ Can someone explain where the `xs` went *missing* ?
 <br>
 <br>
 
-## Trees 
+## Trees
 
 Recall the `Tree a` type from last time
 
 ```haskell
-data Tree a 
-  = Leaf 
+data Tree a
+  = Leaf
   | Node a (Tree a) (Tree a)
 ```
 
@@ -614,7 +614,7 @@ tree3 :: Tree Int
 tree3 = Node 3 Leaf Leaf
 
 tree123 :: Tree Int
-tree123 = Node 1 tree2 tree3 
+tree123 = Node 1 tree2 tree3
 ```
 
 <br>
@@ -650,8 +650,8 @@ sumTree (Node x l r) = ???
 Gathers all the elements that occur as leaves of the tree:
 
 ```haskell
-toList :: Tree a -> [a] 
-toList Leaf         = ??? 
+toList :: Tree a -> [a]
+toList Leaf         = ???
 toList (Node x l r) = ???
 ```
 
@@ -659,7 +659,7 @@ Lets give it a whirl
 
 ```haskell
 >>> height tree123
-2 
+2
 
 >>> sumTree tree123
 6
@@ -680,7 +680,7 @@ Lets give it a whirl
 <br>
 <br>
 
-## Pattern: Tree Fold 
+## Pattern: Tree Fold
 
 Can you spot the pattern? Those three functions are almost the same!
 
@@ -705,7 +705,7 @@ foo (Node x l r) = x : foo l ++ foo r
 1. ???
 2. ???
 
- 
+
 **Step 3** Make *differences* a parameter
 
 ```haskell
@@ -728,7 +728,7 @@ foo p1 p2 (Node x l r) = ???
 ## Pattern: Folding on Trees
 
 ```haskell
-tFold op b Leaf         = b 
+tFold op b Leaf         = b
 tFold op b (Node x l r) = op x (tFold op b l) (tFold op b r)
 ```
 
@@ -749,9 +749,9 @@ tFold :: t_op -> t_b -> Tree a -> t_out
 <br>
 
 
-## QUIZ 
+## QUIZ
 
-Suppose that `t :: Tree Int`. 
+Suppose that `t :: Tree Int`.
 
 What does `tFold (\x y z -> y + z) 1 t` return?
 
@@ -775,16 +775,16 @@ What does `tFold (\x y z -> y + z) 1 t` return?
 <br>
 <br>
 
-## EXERCISE 
+## EXERCISE
 
-Write a function to compute the _largest_ element in a tree 
+Write a function to compute the _largest_ element in a tree
 or `0` if tree is empty or all negative.
 
 ```haskell
 treeMax :: Tree Int -> Int
-treeMax t = tFold f b t 
-  where 
-     f    = ??? 
+treeMax t = tFold f b t
+  where
+     f    = ???
      b    = ???
 ```
 
@@ -800,7 +800,7 @@ treeMax t = tFold f b t
 
 ## Map over Trees
 
-We can also write a `tmap` equivalent of `map` for `Tree`s 
+We can also write a `tmap` equivalent of `map` for `Tree`s
 
 ```haskell
 treeMap :: (a -> b) -> Tree a -> Tree b
@@ -825,7 +825,7 @@ Node 1 (Node 4 Leaf Leaf) (Node 9 Leaf Leaf)
 <br>
 <br>
 
-## EXERCISE 
+## EXERCISE
 
 Recursion is **HARD TO READ** do we really have to use it ?
 
@@ -833,10 +833,10 @@ Lets rewrite `treeMap` using `tFold` !
 
 ```haskell
 treeMap :: (a -> b) -> Tree a -> Tree b
-treeMap f t = tFold op base t 
-  where 
-     op     = ??? 
-     base   = ??? 
+treeMap f t = tFold op base t
+  where
+     op     = ???
+     base   = ???
 ```
 
 When you are done, we should get
@@ -860,33 +860,33 @@ Node "woc" (Node "telgip" Leaf Leaf) (Leaf "oppih" Leaf Leaf)
 ## Examples: `foldDir`
 
 ```haskell
-data Dir a 
+data Dir a
   = Fil a             -- ^ A single file named `a`
   | Sub a [Dir a]     -- ^ A sub-directory name `a` with contents `[Dir a]`
 
-data DirElem a 
+data DirElem a
   = SubDir a          -- ^ A single Sub-Directory named `a`
-  | File a            -- ^ A single File named `a` 
+  | File a            -- ^ A single File named `a`
 
 foldDir :: ([a] -> r -> DirElem a -> r) -> r -> Dir a -> r
-foldDir f r0 dir = go [] r0 dir  
+foldDir f r0 dir = go [] r0 dir
   where
-      go stk r (Fil a)    = f stk r (File a)  
-      go stk r (Sub a ds) = L.foldl' (go stk') r' ds                          
-        where 
-            r'   = f stk r (SubDir a)  
+      go stk r (Fil a)    = f stk r (File a)
+      go stk r (Sub a ds) = L.foldl' (go stk') r' ds
+        where
+            r'   = f stk r (SubDir a)
             stk' = a:stk
 ```
 
-`foldDir` takes as input 
+`foldDir` takes as input
 
-- an *accumulator* `f` of type `[a] -> r -> DirElem a -> r` 
+- an *accumulator* `f` of type `[a] -> r -> DirElem a -> r`
 
-  - takes as *input* the path `[a]` , the current result `r`, the next `DirElem [a]` 
+  - takes as *input* the path `[a]` , the current result `r`, the next `DirElem [a]`
 
   - and returns as *output* the new result `r`
 
-- an *initial* value of the result `r0` and 
+- an *initial* value of the result `r0` and
 
 - directory to fold over `dir`
 
@@ -936,9 +936,9 @@ With practice, the *higher-order* versions become easier
 
 - only have to understand specific operations
 
-- recursion is lower-level & have to see "loop" structure 
+- recursion is lower-level & have to see "loop" structure
 
-- worse, potential for making silly off-by-one errors 
+- worse, potential for making silly off-by-one errors
 
 Indeed, HOFs were the basis of `map/reduce` and the [big-data revolution][4]
 
