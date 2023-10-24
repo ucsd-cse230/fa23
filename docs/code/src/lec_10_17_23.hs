@@ -1,5 +1,7 @@
 module Lec_10_17_23 where
 
+import Prelude hiding (map, foldr)
+
 -- >>> 2 + 1
 -- 3
 
@@ -120,39 +122,130 @@ sleupr = Cons (Cons 1 (Cons 2 Nil)) (Cons (Cons 3 Nil) Nil)
 (+++) (Cons x1 xs)   ys = Cons x1 (xs +++ ys)
 
 size :: List a -> Int
-size Nil = 0
-size (Cons h t) = 1 + size t
+size = foldr (\_ r -> 1 + r)  0
+-- size Nil        = 0
+-- size (Cons h t) = op h (size t)
+--   where op = \h r -> 1 + r
 
 total :: List Int -> Int
-total Nil = 0
-total (Cons h t) = h + total t
+total = foldr (+) 0
+-- total Nil = 0
+-- total (Cons h t) = h + total t
 
 maxList :: List Int -> Int
-maxList Nil        = 0
-maxList (Cons h t) = max h (maxList t)
+maxList = foldr max 0
+-- maxList Nil        = 0
+-- maxList (Cons h t) = max h (maxList t)
 
 concatList Nil = ""
 concatList (Cons h t) = h ++ concatList t
-{-
 
-foldr op b Nil         = b
-foldr op b (Cons h t)  = h `op` (foldr op b t)
 
 -- total   = megabob (+)  0
 -- maxlist = megabob max  0
 -- concat  = megabob (++) ""
 
-bob Nil        = 0
-bob (Cons h t) = h   +   (bob t)
+foldr :: (a -> b -> b) -> b -> List a -> b
+foldr op b Nil         = b
+foldr op b (Cons h t)  = h `op` foldr op b t
 
-bob Nil        = 0
-bob (Cons h t) = h `max` (bob t)
+foo2_in :: List Int
+foo2_in  = 1 `Cons` (2 `Cons` (3 `Cons` Nil))
 
-bob Nil        = ""
-bob (Cons h t) = h ++ bob t
+foo2_out :: List String
+foo2_out = "1" `Cons` ("22" `Cons` ("333" `Cons` Nil))
+
+goo2_out =  1 `Cons` (4 `Cons` (9 `Cons` Nil))
+
+foo3_in = 2 `Cons` (3 `Cons` (1 `Cons` Nil))
+foo3_out = "22" `Cons` ("333" `Cons` ("1" `Cons` Nil))
+
+foo4_in = "blue" `Cons` ("cat" `Cons` ("a" `Cons` Nil))
+foo4_out = 'b' `Cons` ('c' `Cons` ('a' `Cons` Nil))
+
+goo3_out = 4 `Cons` (9 `Cons` (1 `Cons` Nil))
+
+square :: List Int -> List Int
+square = map (\h -> h * h)
+-- square Nil        = Nil
+-- square (Cons h t) = Cons (h*h) (square t)
+
+-- -- sq h = h * h
+-- sq = \h -> h * h
+
+stringify :: List Int -> List String
+stringify = map repeet
+-- stringify Nil        = Nil
+-- stringify (Cons h t) = Cons (repeet h) (stringify t)
+
+firstChars :: List String -> List Char
+firstChars = map head
+-- firstChars Nil = Nil
+-- firstChars (Cons h t) = Cons (head h) (firstChars t)
+
+map :: (t1 -> t2) -> List t1 -> List t2
+map op Nil        = Nil
+map op (Cons h t) = Cons (op h) (map op t)
+
+mapTree :: (a -> b) -> Tree a -> Tree b
+mapTree op (Leaf x)   = Leaf (op x)
+mapTree op (Node l r) = Node (mapTree op l) (mapTree op r)
+
+
+
+{-
+
+getTimeOfDay
+askUserName () = -- asks for input a string and returns that string
+
+foo x = x + 29
+
+... askUserName () ... askUserName () ...
+
+
+bob Nil        = Nil
+bob (Cons h t) = Cons (h*h) (bob t)
+
+bob Nil        = Nil
+bob (Cons h t) = Cons (repeet h) (bob t)
+
+bob Nil        = Nil
+bob (Cons h t) = Cons (head h) (bob t)
+
+-}
+
+repeet :: Int -> String
+repeet 1 = "1"
+repeet 2 = "22"
+repeet 3 = "333"
+
+
+{-
+foldr op b (h1 `Cons` (h2 `Cons` (h3 `Cons` Nil)))
+==> h1 `op` foldr op b (Cons h2 (Cons h3 Nil))
+==> h1 `op` (h2 `op` foldr op b (Cons h3 Nil))
+==> h1 `op` (h2 `op` (h3 `op` foldr op b Nil))
+==> h1 `op` (h2 `op` (h3 `op` b))
+
+
+-}
+
+
+
+
+
+
+
+bob1 Nil        = 0
+bob1 (Cons h t) = h   +   bob1 t
+
+bob2 Nil        = 0
+bob2 (Cons h t) = h `max` bob2 t
+
+bob3 Nil        = ""
+bob3 (Cons h t) = h ++ bob3 t
 
 plus x y = x + y
--}
 
 
 
@@ -195,14 +288,49 @@ myOtherTree =
     (Leaf "five")
 
 concatTree :: Tree String -> String
-concatTree (Leaf str) = str
-concatTree (Node l r) = concatTree l ++ concatTree r
+concatTree = foldTree (++) ""
+-- concatTree (Leaf str) = str
+-- concatTree (Node l r) = concatTree l ++ concatTree r
 
 height :: Tree a -> Int
-height (Leaf _)   = 0
-height (Node l r) = 1 + max (height l) (height r)
+height = foldTree (\a b -> 1 + max a b) 0
+-- height (Leaf _)   = 0
+-- height (Node l r) = 1 + max (height l) (height r)
+
+foldTree op b (Leaf x)   = b
+foldTree op b (Node l r) = lr `op` rr
+                              where
+                                lr = foldTree op b l
+                                rr = foldTree op b r
+{-
+    let x1 = e1
+        x2 = e2
+        ...
+        xn = en
+    in
+        e
 
 
+    e where
+        x1 = e1
+        x2 = e2
+        x3 = en
+
+
+-}
+
+{-
+bob (Leaf x)   = str
+bob (Node l r) = op (bob l) (bob r)
+  where
+    op         = (++)
+
+bob (Leaf x)   = 0
+bob (Node l r) = op (bob l) (bob r)
+  where
+    op         = \a b -> 1 + max a b
+
+-}
 
 -- >>> height myTree
 -- 3
@@ -226,20 +354,3 @@ size (Cons (Cons 1 (Cons 2 Nil)) (Cons (Cons 3 Nil) Nil))
 -->
 2
 -}
-
--- >>> bob1
--- ICons 1 (ICons 2 (ICons 3 INil))
-
-bob :: IList
-bob = INil
-
-bob2 :: IList
-bob3 = ICons 3 bob
-
-bob3 :: IList
-bob2 = ICons 2 bob3
-
-bob1 :: IList
-bob1 = ICons 1 bob2
-
--- >>> size
