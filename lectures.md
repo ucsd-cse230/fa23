@@ -18,10 +18,9 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/12*    | Algebraic Data Types            | [html][03-adt]            |                      | [code][code-10-12] |
 | *10/17*    | Higher-order Fun                | [html][04-hof]            |                      | [code][code-10-17] |
 | *10/19*    | IO                              | [html][05-io]             |                      | [code][code-10-19] |
+| *10/24*    | Type Classes 		       | [html][06-typeclasses]    |                      | [code][code-10-24] |
 
 <!--
-|            | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][code-10-19] |
-|            | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][code-10-19] |
 |            | Type Classes                    | [html][08-typeclasses]    |                      | [code][code-10-21] |
 |            | Functors and Monads             | [html][09-monads]         |                      | [code][code-10-26] |
 |            | Iteration and State             | [lists][10-list] [state][11-state]   |  [pdf][11-state-A] | [code][code-10-28] |
@@ -67,4 +66,5 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [code-10-12]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_12_23.hs
 [code-10-17]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_17_23.hs
 [code-10-19]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/hello.hs
+[code-10-24]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_24_23.hs
 
