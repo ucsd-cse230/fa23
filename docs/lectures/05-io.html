@@ -486,9 +486,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sequence</span><span class="ot"> ::</span> [<span class="dt">Recipe</span> a] <span class="ot">-&gt;</span> <span class="dt">Recipe</span> a</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sequence</span> rs <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
 <p>When you are done you should see the following behavior</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Hello.hs</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> <span class="fu">sequence</span> [<span class="fu">putStrLn</span> <span class="st">&quot;Hello!&quot;</span>, <span class="fu">putStrLn</span> <span class="st">&quot;World!&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> <span class="fu">sequence</span> [<span class="fu">putStrLn</span> <span class="st">&quot;Hello!&quot;</span>, <span class="fu">putStrLn</span> <span class="st">&quot;World!&quot;</span>]</span></code></pre></div>
 <p>and then</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ghc <span class="at">--make</span> Hello.hs</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./hello</span>
@@ -527,12 +525,31 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br>
 <br>
 <br></p>
-<h2 id="naming-recipe-results-via-assignment">Naming Recipe Results via “Assignment”</h2>
-<p>You can write</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> recipe</span></code></pre></div>
+<h2 id="binding-recipe-results-to-a-name">“Binding” Recipe Results to a Name</h2>
+<p>A <strong>bind</strong> operator <code class="sourceCode haskell"><span class="op">&gt;&gt;=</span></code></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- | Run first</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>r1 <span class="op">&gt;&gt;=</span> \x <span class="ot">-&gt;</span> r2</span></code></pre></div>
+<p>Result is a **new recipe* which</p>
+<ol type="1">
+<li>First <em>runs</em> <code class="sourceCode haskell">r1</code> and saves the result in <code class="sourceCode haskell">x</code></li>
+<li>And then <em>runs</em> <code class="sourceCode haskell">r2</code></li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br></p>
+<h2 id="binding-recipe-results-to-a-name-1">“Binding” Recipe Results to a Name</h2>
+<p>Also, maybe simpler, you can write</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">do</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> r1</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  r2</span></code></pre></div>
 <p>to <em>name</em> the result of executing <code class="sourceCode haskell">recipe</code></p>
 <ul>
-<li><code class="sourceCode haskell">x</code> can be used to refer to the result in <em>later</em> code</li>
+<li><code class="sourceCode haskell">x</code> can be used to refer to the result of <code class="sourceCode haskell">r1</code> in <em>later</em> code <code class="sourceCode haskell">r2</code></li>
 </ul>
 <p><br>
 <br>
@@ -542,18 +559,18 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <br>
 <br>
 <br></p>
-<h2 id="naming-recipe-results-via-assignment-1">Naming Recipe Results via “Assignment”</h2>
+<h2 id="binding-recipe-results-to-a-name-2">“Binding” Recipe Results to a Name</h2>
 <p>Lets, write a function that <em>asks</em> for the user’s name</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> ask</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ot">ask ::</span> <span class="dt">Recipe</span> ()</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>ask <span class="ot">=</span> <span class="kw">do</span> name <span class="ot">&lt;-</span> <span class="fu">getLine</span>;</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">putStrLn</span> (<span class="st">&quot;Hello &quot;</span> <span class="op">++</span> name <span class="op">++</span> <span class="st">&quot;!&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> ask</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ot">ask ::</span> <span class="dt">Recipe</span> ()</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>ask <span class="ot">=</span> <span class="kw">do</span> name <span class="ot">&lt;-</span> <span class="fu">getLine</span>;</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">putStrLn</span> (<span class="st">&quot;Hello &quot;</span> <span class="op">++</span> name <span class="op">++</span> <span class="st">&quot;!&quot;</span>)</span></code></pre></div>
 <p>Which produces the desired result</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./hello</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Ranjit</span>             <span class="co"># user enters</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> Ranjit!</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./hello</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Ranjit</span>             <span class="co"># user enters</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> Ranjit!</span></code></pre></div>
 <p><br>
 <br>
 <br>
@@ -565,29 +582,29 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="exercise">EXERCISE</h2>
 <p>Modify the above code so that the program <em>repeatedly</em>
 asks for the users’s name <em>until</em> they provide a <em>non-empty</em> string.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Hello.hs</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> repeatAsk</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="ot">repeatAsk ::</span> <span class="dt">Recipe</span> ()</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>repeatAsk <span class="ot">=</span> _fill_this_in</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="ot">isEmpty ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>isEmpty s <span class="ot">=</span> <span class="fu">length</span> s <span class="op">==</span> <span class="dv">0</span></span></code></pre></div>
-<p>When you are done you should get the following behavior</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ghc <span class="at">--make</span> hello.hs</span>
+<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Hello.hs</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./hello</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># user hits return</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># user hits return</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># user hits return</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ranjit</span>  <span class="co"># user enters</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> Ranjit!</span></code></pre></div>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> repeatAsk</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="ot">repeatAsk ::</span> <span class="dt">Recipe</span> ()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>repeatAsk <span class="ot">=</span> _fill_this_in</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="ot">isEmpty ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>isEmpty s <span class="ot">=</span> <span class="fu">length</span> s <span class="op">==</span> <span class="dv">0</span></span></code></pre></div>
+<p>When you are done you should get the following behavior</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ghc <span class="at">--make</span> hello.hs</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./hello</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># user hits return</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># user hits return</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># user hits return</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="ex">What</span> is your name<span class="pp">?</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ranjit</span>  <span class="co"># user enters</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> Ranjit!</span></code></pre></div>
 <p><br>
 <br>
 <br>
@@ -598,23 +615,23 @@ asks for the users’s name <em>until</em> they provide a <em>non-empty</em> str
 <br></p>
 <h2 id="exercise-1">EXERCISE</h2>
 <p>Modify your code to <em>also</em> print out a <strong>count</strong> in the prompt</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ghc <span class="at">--make</span> hello.hs</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./hello</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">0</span><span class="kw">)</span> <span class="ex">What</span> is your name<span class="pp">?</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># user hits return</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">1</span><span class="kw">)</span> <span class="ex">What</span> is your name<span class="pp">?</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># user hits return</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">2</span><span class="kw">)</span> <span class="ex">What</span> is your name<span class="pp">?</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># user hits return</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">3</span><span class="kw">)</span> <span class="ex">What</span> is your name<span class="pp">?</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ranjit</span>                    <span class="co"># user enters</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> Ranjit!</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ghc <span class="at">--make</span> hello.hs</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./hello</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">0</span><span class="kw">)</span> <span class="ex">What</span> is your name<span class="pp">?</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># user hits return</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">1</span><span class="kw">)</span> <span class="ex">What</span> is your name<span class="pp">?</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># user hits return</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">2</span><span class="kw">)</span> <span class="ex">What</span> is your name<span class="pp">?</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># user hits return</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">3</span><span class="kw">)</span> <span class="ex">What</span> is your name<span class="pp">?</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Ranjit</span>                    <span class="co"># user enters</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> Ranjit!</span></code></pre></div>
 <h2 id="thats-all-about-io">That’s all about IO</h2>
 <p>You should be able to implement <code class="sourceCode haskell">build</code> from <code class="sourceCode haskell">Directory.hs</code></p>
 <p>Using these library functions imported at the top of the file</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">System.FilePath</span>   (takeDirectory, takeFileName, (&lt;/&gt;))</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">System.Directory</span>  (doesFileExist, listDirectory)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">System.FilePath</span>   (takeDirectory, takeFileName, (&lt;/&gt;))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="dt">System.Directory</span>  (doesFileExist, listDirectory)</span></code></pre></div>
 <p>The functions are</p>
 <ul>
 <li><code class="sourceCode haskell">takeDirectory</code></li>
