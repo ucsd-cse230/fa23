@@ -52,7 +52,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [03-adt]: lectures/03-adt.html
 [04-hof]: lectures/04-hof.html
 [05-io]: lectures/05-io.html
-
+[06-typeclasses]: lectures/06-typeclasses.html
 
 
 [01-haskell]: static/raw/lec-haskell.pdf
