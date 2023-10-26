@@ -18,7 +18,8 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/12*    | Algebraic Data Types            | [html][03-adt]            |                      | [code][code-10-12] |
 | *10/17*    | Higher-order Fun                | [html][04-hof]            |                      | [code][code-10-17] |
 | *10/19*    | IO                              | [html][05-io]             |                      | [code][code-10-19] |
-| *10/24*    | Type Classes 		       | [html][06-typeclasses]    |                      | [code][code-10-24] |
+| *10/24*    | Type Classes 		           | [html][06-typeclasses]    |                      | [code][code-10-24] |
+| *10/26*    | Functors and Applicatives       | [html][07-functors]       |                      | [code][code-10-26] |
 
 <!--
 |            | Type Classes                    | [html][08-typeclasses]    |                      | [code][code-10-21] |
@@ -53,6 +54,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [04-hof]: lectures/04-hof.html
 [05-io]: lectures/05-io.html
 [06-typeclasses]: lectures/06-typeclasses.html
+[07-functors]: lectures/07-functors.html
 
 
 [01-haskell]: static/raw/lec-haskell.pdf
@@ -67,4 +69,3 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [code-10-17]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_17_23.hs
 [code-10-19]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/hello.hs
 [code-10-24]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_24_23.hs
-
