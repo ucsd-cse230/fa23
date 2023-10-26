@@ -13,13 +13,13 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | **Date**   | **Topic**                       | **Notes**                 | **Markup**           | **Code**           |
 |:----------:|:--------------------------------|:--------------------------|:---------------------|:-------------------|
 | *9/28*     | Intro                           | [pdf][00-intro]           |                      |                    |
-| *10/3*     | Lambda Calculus                 | [html][01-lambda]         |                      |                    |
-| *10/10*    | Haskell Basics                  | [html][02-basic]          |                      | [code][code-10-10]
-| *10/12*    | Algebraic Data Types            | [html][03-adt]            |                      | [code][code-10-12] |
-| *10/17*    | Higher-order Fun                | [html][04-hof]            |                      | [code][code-10-17] |
-| *10/19*    | IO                              | [html][05-io]             |                      | [code][code-10-19] |
-| *10/24*    | Type Classes 		           | [html][06-typeclasses]    |                      | [code][code-10-24] |
-| *10/26*    | Functors and Applicatives       | [html][07-functors]       |                      | [code][code-10-26] |
+| *10/3*     | Lambda Calculus                 | [html][01-lambda]         | [pdf][01-pdf]        |                    |
+| *10/10*    | Haskell Basics                  | [html][02-basic]          | [pdf][02-pdf]        | [code][code-10-10]
+| *10/12*    | Algebraic Data Types            | [html][03-adt]            | [pdf][03-pdf]        | [code][code-10-12] |
+| *10/17*    | Higher-order Fun                | [html][04-hof]            | [pdf][04-pdf]        | [code][code-10-17] |
+| *10/19*    | IO                              | [html][05-io]             | [pdf][05-pdf]        | [code][code-10-19] |
+| *10/24*    | Type Classes 		           | [html][06-typeclasses]    | [pdf][06-pdf]        | [code][code-10-24] |
+| *10/26*    | Functors and Applicatives       | [html][07-functors]       | [pdf][07-pdf]        | [code][code-10-26] |
 
 <!--
 |            | Type Classes                    | [html][08-typeclasses]    |                      | [code][code-10-21] |
@@ -57,13 +57,14 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [07-functors]: lectures/07-functors.html
 
 
-[01-haskell]: static/raw/lec-haskell.pdf
-[01-lambda-A]: static/raw/01-lambda-A.pdf
-[01-lambda-B]: static/raw/01-lambda-B.pdf
-[01-lambda-C]: static/raw/01-lambda-C.pdf
-[01-lambda-D]: static/raw/01-lambda-D.pdf
-[07-patterns-A]: static/raw/07-patterns-A.pdf
-[11-state-A]: static/raw/11-state-A.pdf
+[01-pdf]: static/raw/01-lambda.pdf
+[02-pdf]: static/raw/02-basic.pdf
+[03-pdf]: static/raw/03-adt.pdf
+[04-pdf]: static/raw/04-hof.pdf
+[05-pdf]: static/raw/05-io.pdf
+[06-pdf]: static/raw/06-classes.pdf
+[07-pdf]: static/raw/07-functors.pdf
+
 [code-10-10]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_10_23.hs
 [code-10-12]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_12_23.hs
 [code-10-17]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_17_23.hs
