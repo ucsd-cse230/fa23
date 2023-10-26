@@ -1,6 +1,6 @@
 ---
 title: Functors and Applicatives
-date: 2019-06-5
+date: 2023-10-26
 headerImg: books.jpg
 ---
 
@@ -438,9 +438,6 @@ so that when you're done we get
 -- >>> eval (Div (Number 60) (Minus (Number 5) (Number 5)))
 -- Nothing
 ```
-
-
-
 
 
 ## To avoid crash, return a `Result`
