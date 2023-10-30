@@ -69,4 +69,5 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [code-10-12]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_12_23.hs
 [code-10-17]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_17_23.hs
 [code-10-19]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/hello.hs
-[code-10-24]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_24_23.hs
+[code-10-24]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_26_23.hs
+[code-10-26]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_24_23.hs
