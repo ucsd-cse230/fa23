@@ -176,8 +176,6 @@ instance ToJVal a => ToJVal (Table String a) where
 
 
 
-
-
 keyVals :: Table k v -> [(k, v)]
 keyVals (Bind k v rest) = (k, v) : keyVals rest
 keyVals Emp             = []

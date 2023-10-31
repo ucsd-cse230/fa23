@@ -2,7 +2,7 @@
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE UndecidableInstances #-}
-module Lec_10_24_23 where
+module Lec_10_26_23 where
 
 import Prelude hiding (showList)
 
