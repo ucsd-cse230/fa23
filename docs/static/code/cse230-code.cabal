@@ -23,6 +23,7 @@ library
       Lec_10_17_23
       Lec_10_24_23
       Lec_10_26_23
+      Lec_10_31_23
   hs-source-dirs:
       src
   build-depends:

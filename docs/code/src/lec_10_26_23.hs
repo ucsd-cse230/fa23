@@ -2,7 +2,7 @@
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE UndecidableInstances #-}
-module Lec_10_26_23 where
+module Lec_10_24_23 where
 
 import Prelude hiding (showList)
 
@@ -171,8 +171,6 @@ instance ToJVal a => ToJVal (Table String a) where
 
 -- >>> jval [[1,2,3], [4,5,6]]
 -- JArr [JArr [JNum 1.0,JNum 2.0,JNum 3.0],JArr [JNum 4.0,JNum 5.0,JNum 6.0]]
-
-
 
 
 
