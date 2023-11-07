@@ -3,7 +3,12 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use camelCase" #-}
+{-# HLINT ignore "Replace case with maybe" #-}
+{-# HLINT ignore "Use list comprehension" #-}
+{-# HLINT ignore "Use newtype instead of data" #-}
+{-# HLINT ignore "Use foldr" #-}
 module Lec_11_7_23 where
+import qualified Data.Map as M
 
 data Expr
   = Nbr Int            -- ^ 0,1,2,3,4
@@ -53,6 +58,13 @@ bindResult arg1 doStuff =
         Err e ->  Err e
         Ok v1 -> doStuff v1
 
+bindMaybe :: Maybe a -> (a -> Maybe b) -> Maybe b
+bindMaybe arg1 doStuff =
+    case arg1 of
+        Nothing -> Nothing
+        Just v1 -> doStuff v1
+
+
 
 bindOption :: Option a -> (a -> Option b) -> Option b
 bindOption arg1 doStuff =
@@ -64,10 +76,6 @@ bindOption arg1 doStuff =
 instance Functor Option where
     fmap _ None     = None
     fmap f (Some x) = Some (f x)
-{-
-class Functor t where
-    fmap :: (a -> b) -> t a -> t b
--}
 
 map2 :: (a1 -> a2 -> b) -> Option a1 -> Option a2 -> Option b
 map2 f (Some v1) (Some v2) = Some (f v1 v2)
@@ -79,7 +87,7 @@ instance Monad Option where
     (>>=) = bindOption
 
     return :: a -> Option a
-    return = Some
+    return x = Some x
 {-
 
     e1 >>= \x ->
@@ -97,8 +105,21 @@ class Monad m where
     (>>=) :: m a -> (a -> m b) -> m b
     return :: a -> m a
 
+do { x <- e1; e2 }
+
+e1 >>= \x -> e2
+
 -}
 
+evalE :: Expr -> Result String Int
+evalE = go
+  where
+   go (Nbr n)     = return n
+   go (Neg e)     = do { v <- go e; return (negate v) }
+   go (Add e1 e2) = do { v1 <- go e1; v2 <- go e2 ; return(v1 + v2) }
+   go (Sub e1 e2) = do { v1 <- go e1; v2 <- go e2 ; return (v1 - v2) }
+   go (Div e1 e2) = do { v1 <- go e1; v2 <- go e2 ;  if v2 == 0 then Err (show e2) else return (v1 `div` v2) }
+   go (Ite e1 e2 e3) = do { v1 <- go e1; if v1 /= 0 then go e2 else go e3 }
 
 
 eval1 :: Expr -> Option Int
@@ -130,3 +151,215 @@ throw e = Err e
 
 ex0 :: Expr
 ex0 = Nbr 0
+
+
+{-
+
+data Option   a = None    | Some a
+data Maybe    a = Nothing | Just a
+data Result e a = Err e   | Ok a
+data List     a = Nil     | Cons a (List a)
+-}
+
+returnList :: a -> [a]
+returnList x = [x]
+
+bindList :: [a] -> (a -> [b]) -> [b]
+bindList     [] _ = []
+bindList (x:xs) f = f x ++ bindList xs f
+
+{-
+instance Monad [] where
+   return = returnList
+   (>>=) = bindList
+
+[x1,x2,x3] >>= f    ===>    f x1 ++ f x2 ++ f x3
+
+
+-}
+
+
+quiz1 :: [(String, Integer)]
+quiz1 = do
+    x <- ["cat", "dog"]
+    y <- [0, 1]
+    return (x, y)
+
+quiz1' :: [(String, Integer)]
+quiz1' = ["cat", "dog"] >>= \x ->
+            [0, 1] >>= \y -> return (x, y)
+
+{-
+[0, 1] >>= (\y -> return (x, y))
+    ==> (\y -> return (x, y)) 0 ++ (\y -> return (x, y)) 1
+    ==> (return (x, 0))  ++ (return (x, 1))
+    ==> [(x, 0)]  ++ [(x, 1)]
+    ==> [(x, 0), (x, 1)]
+
+["cat", "dog"] >>= \x ->
+            [0, 1] >>= \y -> return (x, y)
+===>
+
+["cat", "dog"] >>= (\x -> [(x, 0), (x, 1)])
+===> \x -> [(x, 0), (x, 1)]) "cat" ++ (\x -> [(x, 0), (x, 1)]) "dog"
+===> [("cat", 0), ("cat", 1)]) ++ ( [("dog", 0), ("dog", 1)])
+===> [("cat", 0), ("cat", 1), ("dog", 0), ("dog", 1)]
+
+
+
+[0, 1] >>= f ==> f 0 ++ f 1
+["cat", "dog"] >>= f    ==> f "cat" ++ f "dog"
+-}
+
+
+foo :: Monad m => (t -> b) -> m t -> m b
+foo f xs = do
+    x <- xs
+    return (f x)
+
+-- >>> foo (\n -> n * n) (Ok 10)
+-- Ok 100
+
+-- >>> triples
+-- [[],[],[],[],[],[],[],[]]
+
+-- >>> [0..5]
+-- [0,1,2,3,4,5]
+
+-- >>> pyTriples 100
+-- [(3,4,5),(5,12,13),(6,8,10),(7,24,25),(8,15,17),(9,12,15),(9,40,41),(10,24,26),(11,60,61),(12,16,20),(12,35,37),(13,84,85),(14,48,50),(15,20,25),(15,36,39),(16,30,34),(16,63,65),(18,24,30),(18,80,82),(20,21,29),(20,48,52),(21,28,35),(21,72,75),(24,32,40),(24,45,51),(24,70,74),(25,60,65),(27,36,45),(28,45,53),(28,96,100),(30,40,50),(30,72,78),(32,60,68),(33,44,55),(33,56,65),(35,84,91),(36,48,60),(36,77,85),(39,52,65),(39,80,89),(40,42,58),(40,75,85),(42,56,70),(45,60,75),(48,55,73),(48,64,80),(51,68,85),(54,72,90),(57,76,95),(60,63,87),(60,80,100),(65,72,97)]
+
+pyTriples :: Int -> [(Int, Int, Int)]
+pyTriples n = do
+    x <- [1..n]
+    y <- [x+1..n]
+    z <- [y+1..n]
+    if x*x + y*y == z * z
+        then [(x, y, z)]
+        else []
+
+
+triples :: [[a]]
+triples = do
+    x <- [0, 1]
+    y <- [10, 11]
+    z <- [100, 101]
+    return []
+
+-- >>> bits 1
+-- []
+
+bits :: Int -> [String]
+bits 0 = [""]
+bits n = do
+    str <- bits (n-1)
+    x   <- ['0', '1']
+    return (x : str)
+
+{-
+bits 0
+==> [""]
+
+bits 1
+==> do
+      str <-  [""]
+      x   <- ['0', '1']
+      [x : str]
+
+==> [""] >>= \str ->
+        (['0', '1'] >>= \x -> [x:str])
+
+==> [""] >>= \str -> (['0':str, '1':str])
+
+
+==> []
+
+do {z <- [] ; e }
+
+==> [] >>= \z -> e
+
+==> []
+
+(['0', '1'] >>= \x -> [x:str])  ===>  ['0':str, '1':str]
+
+-}
+
+
+
+
+
+
+
+
+data Tree a
+  = Leaf a
+  | Node (Tree a) (Tree a)
+  deriving (Show)
+
+charT :: Tree Char
+charT = Node
+            (Node (Leaf 'a') (Leaf 'b'))
+            (Node (Leaf 'c') (Leaf 'a'))
+
+
+-- >>> labelm charT
+-- Node (Node (Leaf ('a',0)) (Leaf ('b',1))) (Node (Leaf ('c',2)) (Leaf ('a',0)))
+
+label ::  Tree a -> Tree (a, Int)
+label t = t'
+  where
+   (_, t') = helper 0 t
+   helper :: Int -> Tree a -> (Int, Tree (a, Int))
+   helper n (Leaf x)   = (n+1, Leaf (x, n))
+   helper n (Node l r) = (n'', Node l' r')
+     where
+       (n', l')  = helper n  l
+       (n'', r') = helper n' r
+
+{-
+data Map k v
+
+    empty :: Map k v
+    insert :: k -> v -> Map k v -> Map k v
+    findWithDefault :: v -> k -> Map k v -> v
+
+-}
+
+
+labelm :: (Ord a) => Tree a -> Tree (a, Int)
+labelm t = t'
+  where
+   (_, t') = helper M.empty t
+   -- helper :: M.Map a Int -> Tree a -> (M.Map a Int, Tree (a, Int))
+   helper m (Leaf x)   = (m', Leaf (x, v))
+                          where
+                            v  = M.findWithDefault (M.size m) x m
+                            m' = M.insert x v m
+   helper m (Node l r) = (m'', Node l' r')
+     where
+       (m', l')  = helper m  l
+       (m'', r') = helper m' r
+
+data ST a = MkST (Int -> (Int, a))
+
+-- instance Monad ST where
+--     -- return :: a -> ST a
+--     -- (>>=)  :: ST a -> (a -> ST b) -> ST b
+
+-- >>> take 40 (funny 0)
+-- [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39]
+
+myfoldl :: (a -> b -> a) -> a -> [b] -> a
+myfoldl _ b []     = b
+myfoldl f b (x:xs) = myfoldl f (f b x) xs
+
+myfoldr :: (a -> b -> b) -> b -> [a] -> b
+myfoldr f b []     = b
+myfoldr f b (x:xs) = f x (myfoldr f b xs)
+
+funny n = n : funny (n+1)
+{-
+
+myFoldl (+) 0 [x1,x2,x3,x4,x5]
+
+-}
