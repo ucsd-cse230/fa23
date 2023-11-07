@@ -23,7 +23,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/26*    | Functors                        | [html][07-functors]       | [pdf][07-pdf]        | [code][code-10-26] |
 | *10/31*    | Monads                          | [html][08-monads]         | [pdf][08-pdf]        | [code][code-10-31] |
 | *11/2*     | **First Midterm**               |                           |                      |                    |
-| *11/7*     |  Iteration and State            | [lists][10-list] [state][11-state]   |  [pdf][10-pdf] | [code][code-11-7] |
+| *11/7*     |  Iteration and State            | [lists][09-list] [state][10-state]   |  [pdf][10-pdf] | [code][code-11-7] |
 
 <!--
 |            | Parser Combinators              | [html][12-parsers]        |                      | [code][code-11-2]  |
@@ -57,6 +57,8 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [06-typeclasses]: lectures/06-typeclasses.html
 [07-functors]: lectures/07-functors.html
 [08-monads]: lectures/08-monad.html
+[09-list]: lectures/09-list.html
+[10-state]: lectures/10-state.html
 
 [01-pdf]: static/raw/01-lambda.pdf
 [02-pdf]: static/raw/02-basic.pdf
