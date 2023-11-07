@@ -56,7 +56,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [05-io]: lectures/05-io.html
 [06-typeclasses]: lectures/06-typeclasses.html
 [07-functors]: lectures/07-functors.html
-[08-monads]: lectures/08-monad.html
+[08-monads]: lectures/08-monads.html
 [09-list]: lectures/09-list.html
 [10-state]: lectures/10-state.html
 
