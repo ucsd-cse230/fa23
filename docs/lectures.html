@@ -315,10 +315,23 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <td style="text-align: left;"><a href="static/raw/08-monads.pdf">pdf</a></td>
 <td style="text-align: left;"><a href="https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_31_23.hs">code</a></td>
 </tr>
+<tr class="even">
+<td style="text-align: center;"><em>11/2</em></td>
+<td style="text-align: left;"><strong>First Midterm</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><em>11/7</em></td>
+<td style="text-align: left;">Iteration and State</td>
+<td style="text-align: left;">[lists][10-list] [state][11-state]</td>
+<td style="text-align: left;"><a href="static/raw/10-state.pdf">pdf</a></td>
+<td style="text-align: left;"><a href="https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_11_7_23.hs">code</a></td>
+</tr>
 </tbody>
 </table>
 <p>&lt;!–
-| | Iteration and State | [lists][10-list] [state][11-state] | [pdf][11-state-A] | [code][code-10-28] |
 | | Parser Combinators | [html][12-parsers] | | [code][code-11-2] |
 | | “” | | | [code][code-11-4] |
 | | Monad Transformers | [html][13-transformers] | | [code][code-11-9] |
@@ -329,165 +342,6 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <em>12/8</em> | Monad Transformers | [html][13-transformers] | [TBD][13-trans] | <a href="https://github.com/ucsd-cse230/fa23/tree/master/static/code/src">code</a> |<br />
            | Property-based Testing | [html][14-testing] | <a href="TBD">TBD</a> | <a href="https://github.com/ucsd-cse230/fa23/tree/master/static/code/src">code</a> |<br />
            | List Monad | [html][10-list] | | e</div>
-<p>– &gt;&gt;&gt; 1 + 2
-– 3</p>
-<p>inc :: Int -&gt; Int
-inc x = x + 1</p>
-<p>– &gt;&gt;&gt; plus True False
-– No instance for (Num Bool) arising from a use of <code>plus' -- In the expression: plus True False -- In an equation for</code>it_aKhA’: it_aKhA = plus True False</p>
-<p>plus :: Num a =&gt; a -&gt; a -&gt; a
-plus x y = x + y</p>
-<p>eq :: Eq a =&gt; a -&gt; a -&gt; Bool
-eq x y = x == y</p>
-<p>lt :: Ord a =&gt; a -&gt; a -&gt; Bool
-lt x y = x &lt; y</p>
-<p>– &gt;&gt;&gt; show [1,2,3]
-– “[1,2,3]”</p>
-<p>– &gt;&gt;&gt; Taco &lt; Burrito
-– True</p>
-<p>– &gt;&gt;&gt; Taco
-– <Taco></p>
-<p>data Filling = Rice | Beans deriving (Eq, Ord)</p>
-<p>data Jhala = Taco | Burrito | Salsa deriving (Eq, Ord )</p>
-<p>– jInt :: Jhala -&gt; Int
-– jInt Taco = 0
-– jInt Burrito = 1
-– jInt Salsa = 2</p>
-<p>– instance Show Jhala where
-– show Taco = “<Taco>”
-– show Burrito = “<Burrito>”
-– show Salsa = “<Salsa>”</p>
-<p>– instance Eq Jhala where
-– (==) :: Jhala -&gt; Jhala -&gt; Bool
-– (==) x y = jInt x == jInt y</p>
-<p>– instance Ord Jhala where
-– compare x y = compare (jInt x) (jInt y)</p>
-<p>– &gt;&gt;&gt; get menu0 “taco”
-– 5</p>
-<p>– &gt;&gt;&gt; get menu1 Salsa
-– 0</p>
-<p>data Table k v
-= Emp
-| Bind k v (Table k v)
-deriving (Show)
-instance Mappable Table where
-gmap _ Emp = Emp
-gmap f (Bind k v rest) = Bind k (f v) (gmap f rest)</p>
-<p>menu0 :: Table String Int
-menu0 = Bind “burrito” 10 (Bind “salsa” 0 (Bind “taco” 5 Emp))</p>
-<p>menu1 :: Table Jhala Int
-menu1 = Bind Burrito 10 (Bind Taco 5 (Bind Salsa 0 Emp))</p>
-<p>– &gt;&gt;&gt; getU menu0 “churro”
-– Fail</p>
-<p>data Option v = Some v | None
-data Maybe v = Just v | Nothing
-data Nullable v = Value v | Null deriving (Show)
-data List v = Cons v (List v) | Empty</p>
-<p>– &gt;&gt;&gt; waiter menu0 “taco”
-– “the price is $5”</p>
-<p>– &gt;&gt;&gt; read “67.45” :: Float
-– 67.45</p>
-<p>waiter :: Table String Int -&gt; String -&gt; String
-waiter menu item = case getU menu item of
-Null -&gt; “sorry, we do not sell” ++ item
-Value n -&gt; “the price is $” ++ show n</p>
-<p>getU :: Ord k =&gt; Table k v -&gt; k -&gt; Nullable v
-getU (Bind key value rest) k
-| k == key = Value value
-| k &lt; key = Null
-| otherwise = getU rest k
-getU Emp _ = Null</p>
-<p>get :: Eq k =&gt; Table k v -&gt; k -&gt; v
-get (Bind key value rest) k
-| key == k = value
-| otherwise = get rest k
-get Emp _ = undefined – spl value or exception</p>
-<p>getWithDefault :: Eq k =&gt; v -&gt; Table k v -&gt; k -&gt; v
-getWithDefault def (Bind key value rest) k
-| key == k = value
-| otherwise = getWithDefault def rest k
-getWithDefault def Emp _ = def – spl value or exception</p>
-<p>data Blah = Aaa | Baa | Haa</p>
-<p>foo :: Blah -&gt; Int
-foo Aaa = 0
-foo Baa = 1
-foo Haa = 2</p>
-<p>data JVal
-= JNum Double
-| JBool Bool
-| JStr String
-| JArr [JVal]
-| JObj [ (String, JVal) ]
-deriving (Show)</p>
-<p>class ToJVal a where
-jval :: a -&gt; JVal</p>
-<p>instance ToJVal Integer where
-jval i = JNum (fromIntegral i)</p>
-<p>instance ToJVal Int where
-jval i = JNum (fromIntegral i)</p>
-<p>instance ToJVal Double where
-jval d = JNum d</p>
-<p>data MyString = S String</p>
-<p>instance ToJVal MyString where
-jval (S s) = JStr s</p>
-<p>instance ToJVal a =&gt; ToJVal [a] where
-jval xs = JArr (map jval xs)</p>
-<p>instance (ToJVal a, ToJVal b) =&gt; ToJVal (a, b) where
-– jval (x, y) = JArr [ jval x, jval y]
-jval (x, y) = JObj [ (“0”, jval x), (“1”, jval y)]</p>
-<p>– &gt;&gt;&gt; jval (S “one”, (2, (S “three”, (S “four”, menu0))))
-– JObj [(“0”,JStr “one”),(“1”,JObj [(“0”,JNum 2.0),(“1”,JObj [(“0”,JStr “three”),(“1”,JObj [(“0”,JStr “four”),(“1”,JObj [(“burrito”,JNum 10.0),(“salsa”,JNum 0.0),(“taco”,JNum 5.0)])])])])]</p>
-<p>instance ToJVal a =&gt; ToJVal (Table String a) where
-jval t = JObj [ (k, jval v) | (k, v) &lt;- kvs ]
-– JObj (map ((k, v) -&gt; (k, intJVal v)) kvs)
-where
-kvs = keyVals t</p>
-<p>– &gt;&gt;&gt; jval [[1,2,3], [4,5,6]]
-– JArr [JArr [JNum 1.0,JNum 2.0,JNum 3.0],JArr [JNum 4.0,JNum 5.0,JNum 6.0]]</p>
-<p>keyVals :: Table k v -&gt; [(k, v)]
-keyVals (Bind k v rest) = (k, v) : keyVals rest
-keyVals Emp = []</p>
-<p>showw :: (Mappable c) =&gt; c Int -&gt; c String
-showw = gmap show</p>
-<p>sq :: (Mappable c) =&gt; c Int -&gt; c Int
-sq = gmap (-&gt; x * x)</p>
-<p>– &gt;&gt;&gt; sq [1,2,3,4,5]
-– [1,4,9,16,25]</p>
-<p>– &gt;&gt;&gt; sq (Node 30 (Node 1 Leaf Leaf) (Node 2 Leaf Leaf))
-– Node 900 (Node 1 Leaf Leaf) (Node 4 Leaf Leaf)</p>
-<p>– &gt;&gt;&gt; sq menu0</p>
-<p>– Bind “burrito” 100 (Bind “salsa” 0 (Bind “taco” 25 Emp))
-data Tree a
-= Leaf
-| Node a (Tree a) (Tree a)
-deriving (Show)</p>
-<p>showTree :: Tree Int -&gt; Tree String
-showTree = mapTree show
-– showTree Leaf = Leaf
-– showTree (Node v l r) = Node (show v) (showTree l) (showTree r)</p>
-<p>sqTree :: Tree Int -&gt; Tree Int
-sqTree = mapTree (-&gt; x * x)
-– sqTree Leaf = Leaf
-– sqTree (Node v l r) = Node (v * v) (sqTree l) (sqTree r)</p>
-<p>mapTree :: (t -&gt; a) -&gt; Tree t -&gt; Tree a
-mapTree _ Leaf = Leaf
-mapTree f (Node v l r) = Node (f v) (mapTree f l) (mapTree f r)</p>
-<p>type MyList a = [a]</p>
-<p>– mapList :: (t -&gt; a) -&gt; MyList t -&gt; MyList a
-– mapTree :: (t -&gt; a) -&gt; Tree t -&gt; Tree a</p>
-<p>class Mappable c where
-gmap :: (a -&gt; b) -&gt; c a -&gt; c b</p>
-<p>– &gt;&gt;&gt; :kind Table
-– Table :: * -&gt; * -&gt; *</p>
-<p>instance Mappable [] where
-gmap _ [] = []
-gmap f (x:xs) = f x : gmap f xs</p>
-<p>– Functor</p>
-<p>instance Mappable Tree where
-gmap _ Leaf = Leaf
-gmap f (Node v l r) = Node (f v) (gmap f l) (gmap f r)</p>
-<div class="line-block">           | Proofs as Programs | | | |</div>
-<p>–&gt;</p>
                 <hr>
             </div>
         </div>
