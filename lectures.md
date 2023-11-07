@@ -24,6 +24,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/31*    | Monads                          | [html][08-monads]         | [pdf][08-pdf]        | [code][code-10-31] |
 | *11/2*     | **First Midterm**               |                           |                      |                    |
 | *11/7*     |  Iteration and State            | [lists][10-list] [state][11-state]   |  [pdf][10-pdf] | [code][code-11-7] |
+
 <!--
 |            | Parser Combinators              | [html][12-parsers]        |                      | [code][code-11-2]  |
 |            | ""                              |                           |                      | [code][code-11-4]  |
@@ -37,6 +38,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 |            | Property-based Testing          | [html][14-testing]        | [TBD][TBD]           | [code][code]      |
 |            | List Monad                      | [html][10-list]           |                      |                  e
 
+-->
 
 [lh1]: http://ucsd-progsys.github.io/lh-workshop/01-index.html
 [lh2]: http://ucsd-progsys.github.io/lh-workshop/02-refinements.html
