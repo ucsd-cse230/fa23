@@ -18,7 +18,7 @@ The goal of the project is to give you some hands on
 experience with building a realistic application using
 the principles learned in CSE 230.
 
-- **Friday 11/17** Proposal <!--  [Submit here](https://forms.gle/Fd4CUajSCzS4Er4e7) -->
+- **Friday 11/17** Proposal [Submit here](https://forms.gle/vgQzgCYqUG5RQXqPA)
 - **Friday 12/1** Updates
 - **Friday 12/15** Demonstration
 

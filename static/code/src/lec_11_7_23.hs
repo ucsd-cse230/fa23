@@ -7,6 +7,10 @@
 {-# HLINT ignore "Use list comprehension" #-}
 {-# HLINT ignore "Use newtype instead of data" #-}
 {-# HLINT ignore "Use foldr" #-}
+{-# OPTIONS_GHC -Wno-noncanonical-monad-instances #-}
+{-# HLINT ignore "Use tuple-section" #-}
+{-# HLINT ignore "Redundant return" #-}
+{-# HLINT ignore "Use const" #-}
 module Lec_11_7_23 where
 import qualified Data.Map as M
 
@@ -299,22 +303,22 @@ data Tree a
 charT :: Tree Char
 charT = Node
             (Node (Leaf 'a') (Leaf 'b'))
-            (Node (Leaf 'c') (Leaf 'a'))
+            (Node (Leaf 'b') (Leaf 'a'))
 
 
 -- >>> labelm charT
--- Node (Node (Leaf ('a',0)) (Leaf ('b',1))) (Node (Leaf ('c',2)) (Leaf ('a',0)))
+-- Node (Node (Leaf ('a',0)) (Leaf ('b',1))) (Node (Leaf ('b',1)) (Leaf ('a',0)))
 
 label ::  Tree a -> Tree (a, Int)
 label t = t'
   where
-   (_, t') = helper 0 t
-   helper :: Int -> Tree a -> (Int, Tree (a, Int))
-   helper n (Leaf x)   = (n+1, Leaf (x, n))
-   helper n (Node l r) = (n'', Node l' r')
+   (_, t') = helper t 0
+   helper :: Tree a -> Int -> (Int, Tree (a, Int))
+   helper (Leaf x)   n = (n+1, Leaf (x, n))
+   helper (Node l r) n = (n'', Node l' r')
      where
-       (n', l')  = helper n  l
-       (n'', r') = helper n' r
+       (n', l')  = helper l n
+       (n'', r') = helper r n'
 
 {-
 data Map k v
@@ -325,26 +329,189 @@ data Map k v
 
 -}
 
+-- >>> labelm charT
+-- Node (Node (Leaf ('a',0)) (Leaf ('b',1))) (Node (Leaf ('b',1)) (Leaf ('a',0)))
+
 
 labelm :: (Ord a) => Tree a -> Tree (a, Int)
-labelm t = t'
+labelm t = evalST M.empty (helper t)
   where
-   (_, t') = helper M.empty t
-   -- helper :: M.Map a Int -> Tree a -> (M.Map a Int, Tree (a, Int))
-   helper m (Leaf x)   = (m', Leaf (x, v))
-                          where
-                            v  = M.findWithDefault (M.size m) x m
-                            m' = M.insert x v m
-   helper m (Node l r) = (m'', Node l' r')
-     where
-       (m', l')  = helper m  l
-       (m'', r') = helper m' r
+   helper (Leaf x)   = do n <- nextLabel x
+                          return (Leaf (x, n))
+   helper (Node l r) = do l' <- helper l
+                          r' <- helper r
+                          return (Node l' r')
 
-data ST a = MkST (Int -> (Int, a))
+nextLabel :: Ord p => p -> ST (M.Map p Int) Int
+nextLabel x = do
+  m <- get
+  let v = M.findWithDefault (M.size m) x m
+  put (M.insert x v m)
+  return v
 
--- instance Monad ST where
+
+
+
+
+{-
+        Int -> (Int, thingIcareAbout)
+        Map Char Int -> (Map Char Int, thingIcareAbout)
+
+-}
+
+type State = Int -- can change to other stuff
+
+data ST s a = MkST (s -> (s, a))
+
+instance Functor (ST s) where
+  fmap :: (a -> b) -> ST s a -> ST s b
+  fmap f (MkST st) = MkST (\inputState ->
+    let (outputState, aVal) = st inputState in
+    (outputState, f aVal)
+    )
+
+
+-- >>> evalST 100 next
+-- "100"
+
+{-
+aVal where (_, aval) = f 100
+           f = (\n -> (n + 1, show n))
+
+==>
+
+aVal where (_, aval) = (\n -> (n + 1, show n) 100
+
+==>
+
+aVal where (_, aval) = (101, show 100)
+
+==>
+
+"100"
+
+
+-}
+
+
+
+
+
+
+
+
+
+instance Applicative (ST s) where
+
+instance Monad (ST s) where
+  return :: a -> ST s a
+  return aVal = MkST (\inputState -> (inputState, aVal))
+
+  (>>=) :: ST s a -> (a -> ST s b) -> ST s b
+  (>>=) (MkST sta) doStuff = MkST (\inputState ->
+    let (someState, aVal)  = sta inputState
+        MkST blob          = doStuff aVal
+        (outputState, bVal) = blob someState
+    in
+        (outputState, bVal))
+
+
+-- >>> evalST 100 next
+-- "100"
+
+-- >>> evalST 100 wtf1
+-- "100"
+
+-- >>> evalST 0 wtf2
+-- "3"
+
+wtf2 = do _ <- next
+          _ <- next
+          _ <- next
+          v4 <- next
+          return v4
+
+{-
+        e >>= \x -> return x          THE SAME AS       e
+
+        e1 >>= \x -> e2
+
+IS THE SAME AS
+
+        do  x <- e1
+            e2
+
+e1 >>= \x1 ->
+    e2 >>= \x2 ->
+        e3 >>= \x3 ->
+            BLAH
+
+do x1 <- e1
+   x2 <- e2
+   x3 <- e3
+   BLAH
+
+
+
+ -}
+
+get :: ST s s
+get = MkST (\inputState -> (inputState, inputState))
+
+put :: s -> ST s ()
+put newState = MkST (\_ -> (newState, ()))
+
+
+evalST :: s -> ST s a -> a
+evalST s (MkST f) = aVal where (_, aVal) = f s
+
+type STI = ST Int
+
+next :: STI String
+-- next = MkST (\n -> (n + 1, show n))
+next = do
+    n <- get
+    put (n+1)
+    return (show n)
+
+nextInt :: STI Int
+nextInt = MkST (\n -> (n + 1, n))
+
+wtf1 :: STI String
+wtf1 = next >>= \n -> return n
+{-
+
+
+-}
+    {-
+        sta    :: State -> (State, a)
+        aToSTb :: a -> ST b
+        inputState :: State
+
+
+        bVal :: b
+        outputState :: State
+    -}
+
+
+
 --     -- return :: a -> ST a
 --     -- (>>=)  :: ST a -> (a -> ST b) -> ST b
+
+-- >>> label' charT
+-- Node (Node (Leaf ('a',0)) (Leaf ('b',1))) (Node (Leaf ('b',2)) (Leaf ('a',3)))
+
+label' ::  Tree a -> Tree (a, Int)
+label' t = evalST 0 (helper t)
+  where
+   helper (Leaf x)   = do n <- nextInt
+                          return (Leaf (x, n))
+   helper (Node l r) = do l' <- helper l
+                          r' <- helper r
+                          return (Node l' r')
+
+
+
 
 -- >>> take 40 (funny 0)
 -- [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39]
@@ -353,11 +520,39 @@ myfoldl :: (a -> b -> a) -> a -> [b] -> a
 myfoldl _ b []     = b
 myfoldl f b (x:xs) = myfoldl f (f b x) xs
 
+{-
+
+my (+) 0 [x1,x2,x3,x4]
+==> my (+) (0 + x1) [x2, x3, x4]
+==> my (+) ((0 + x1)+x2) [x3, x4]
+==> my (+) (((0 + x1) + x2) + x3) [x4]
+==> my (+) ((((0 + x1) + x2) + x3) + x4) []
+
+
+my (+) 0 [x1,x2,x3,x4]
+==> my (+) (x1) [x2, x3, x4]
+==> my (+) ((0 + x1)+x2) [x3, x4]
+==> my (+) (((0 + x1) + x2) + x3) [x4]
+==> my (+) ((((0 + x1) + x2) + x3) + x4) []
+
+my (+) 0 [x1,x2,x3,x4]
+==> x1 + (my (+) 0 [x2, x3, x4])
+==> x1 + (x2 + my (+) 0 [x3, x4])
+==> x1 + (x2 + (x3 + my (+) 0 [x4])
+==> x1 + (x2 + (x3 + (x4 + my (+) 0 [])))
+==> x1 + (x2 + (x3 + (x4 + 0)))
+
+
+
+-}
+
 myfoldr :: (a -> b -> b) -> b -> [a] -> b
-myfoldr f b []     = b
+myfoldr _ b []     = b
 myfoldr f b (x:xs) = f x (myfoldr f b xs)
 
+
 funny n = n : funny (n+1)
+
 {-
 
 myFoldl (+) 0 [x1,x2,x3,x4,x5]
