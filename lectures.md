@@ -57,7 +57,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [08-monads]: lectures/08-monads.html
 [09-list]: lectures/09-list.html
 [10-state]: lectures/10-state.html
-[11-parser]: lectures/11-parser.html
+[11-parsers]: lectures/11-parsers.html
 
 [01-pdf]: static/raw/01-lambda.pdf
 [02-pdf]: static/raw/02-basic.pdf
