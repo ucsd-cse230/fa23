@@ -24,15 +24,13 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/31*    | Monads                          | [html][08-monads]         | [pdf][08-pdf]        | [code][code-10-31] |
 | *11/2*     | **First Midterm**               |                           |                      |                    |
 | *11/7*     |  Iteration and State            | [html-1][09-list] [html-2][10-state]   |  [pdf][10-pdf] | [code][code-11-7] |
+| *11/14*    | Parser Combinators              | [html][11-parsers]        |                      | [code][code-11-14] |
 
 <!--
-|            | Parser Combinators              | [html][12-parsers]        |                      | [code][code-11-2]  |
-|            | ""                              |                           |                      | [code][code-11-4]  |
 |            | Monad Transformers              | [html][13-transformers]   |                      | [code][code-11-9]  |
 |            | Property-based Testing          | [html][14-testing]        |                      | [code][code-11-16] |
 |            | Concurrency                     | [html][15-stm]            | [pdf][pfd13]         | [code][code-11-23] |
 |            | Refinement Types                | [1][lh1] [2][lh2] [3][lh3] [4][lh4]   |          |                    |
-
 | *12/3*     | Exceptions                      | [html][13-transformers]   | [pdf][13-exceptions] | [code][code]      |
 | *12/8*     | Monad Transformers              | [html][13-transformers]   | [TBD][13-trans]      | [code][code]      |
 |            | Property-based Testing          | [html][14-testing]        | [TBD][TBD]           | [code][code]      |
@@ -59,6 +57,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [08-monads]: lectures/08-monads.html
 [09-list]: lectures/09-list.html
 [10-state]: lectures/10-state.html
+[11-parser]: lectures/11-parser.html
 
 [01-pdf]: static/raw/01-lambda.pdf
 [02-pdf]: static/raw/02-basic.pdf
@@ -78,3 +77,4 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [code-10-26]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_24_23.hs
 [code-10-31]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_10_31_23.hs
 [code-11-7]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_11_7_23.hs
+[code-11-14]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_11_14_23.hs
