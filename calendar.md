@@ -30,5 +30,5 @@ On [CANVAS calendar](https://canvas.ucsd.edu/courses/48988)
 	- Thursdays 10:00 am - 12:00 pm (https://ucsd.zoom.us/j/2499498988)
 
 * George 
-	- Mondays 1:30 - 3:30 pm (CSE 2217)
+	- Wednesdays 1:30 - 3:30 pm (CSE 2154)
     - Fridays 3:00 - 4:30 pm (CSE 4109)
