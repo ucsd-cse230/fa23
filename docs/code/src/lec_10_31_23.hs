@@ -185,9 +185,7 @@ eval1 = go
    go (Div e1 e2) = do { v1 <- go e1; v2 <- go e2 ;  if v2 == 0 then None else return (v1 `div` v2) }
    go (Ite e1 e2 e3) = do { v1 <- go e1; if v1 /= 0 then go e2 else go e3 }
 
--- eval :: Expr -> Result String Int
-
-eval :: Expr -> m Int
+eval :: Expr -> Result String Int
 eval = go
   where
    go (Nbr n)     = return n

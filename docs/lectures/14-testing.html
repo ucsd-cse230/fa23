@@ -407,7 +407,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse</span> (xs <span class="op">++</span> ys) </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">==&gt;</span> <span class="fu">reverse</span> ([<span class="dv">0</span>] <span class="op">++</span> [<span class="dv">1</span>]) </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">==&gt;</span> <span class="fu">reverse</span> ([<span class="dv">0</span>, <span class="dv">1</span>]) </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">==&gt;</span> [<span class="dv">1</span>, <span class="dv">0</span>])</span></code></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">==&gt;</span> [<span class="dv">1</span>, <span class="dv">0</span>]</span></code></pre></div>
 <p>but</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse</span> xs <span class="op">++</span> <span class="fu">reverse</span> ys</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">==&gt;</span> <span class="fu">reverse</span> [<span class="dv">0</span>] <span class="op">++</span> <span class="fu">reverse</span> [<span class="dv">1</span>]</span>

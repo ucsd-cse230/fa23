@@ -2,7 +2,7 @@
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE UndecidableInstances #-}
-module Lec_10_24_23 where
+module Lec_10_26_23 where
 
 import Prelude hiding (showList)
 
@@ -67,7 +67,8 @@ data Table k v
   = Emp
   | Bind k v (Table k v)
   deriving (Show)
-instance Mappable Table where
+
+instance Mappable (Table k) where
   gmap _ Emp = Emp
   gmap f (Bind k v rest) = Bind k (f v) (gmap f rest)
 

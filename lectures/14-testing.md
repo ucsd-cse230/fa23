@@ -226,7 +226,7 @@ Huh? QC gives us a _counterexample_ with `xs = [0]` and `ys == [1]`
 reverse (xs ++ ys) 
 ==> reverse ([0] ++ [1]) 
 ==> reverse ([0, 1]) 
-==> [1, 0])
+==> [1, 0]
 ```
 
 but 

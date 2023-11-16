@@ -14,7 +14,7 @@
 {-# HLINT ignore "Eta reduce" #-}
 {-# HLINT ignore "Use lambda-case" #-}
 {-# HLINT ignore "Avoid lambda" #-}
-module Lec_11_7_23 where
+module Lec_11_14_23 where
 
 import Prelude hiding (getLine)
 import Data.Char (isAlpha, isDigit)

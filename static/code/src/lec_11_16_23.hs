@@ -15,10 +15,13 @@
 {-# HLINT ignore "Use lambda-case" #-}
 {-# HLINT ignore "Avoid lambda" #-}
 
-module Lec_11_7_23 where
+module Lec_11_16_23 where
 
 import Prelude hiding (getLine)
 import Data.Char (isAlpha, isDigit)
+import Test.QuickCheck
+
+default (Int, Float)
 
 foo :: IO Char
 foo = getChar
@@ -243,3 +246,15 @@ intP :: Parser Int
 intP = do
     cs <- manyP digitCharP
     return (read cs)
+
+-- >>> quickCheck prop_revapp
+prop_revapp :: [Int] -> [Int] -> Bool
+prop_revapp xs ys =
+    reverse (xs ++ ys) == reverse xs ++ reverse ys
+
+quickCheckN :: Testable prop => Int -> prop -> IO ()
+quickCheckN n = quickCheckWith (stdArgs {maxSuccess = n})
+
+
+randomThings :: (Arbitrary a) => IO [a]
+randomThings = sample' arbitrary
