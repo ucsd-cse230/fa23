@@ -342,6 +342,8 @@ labelm t = evalST M.empty (helper t)
                           r' <- helper r
                           return (Node l' r')
 
+
+
 nextLabel :: Ord p => p -> ST (M.Map p Int) Int
 nextLabel x = do
   m <- get
