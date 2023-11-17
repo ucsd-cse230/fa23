@@ -17,9 +17,10 @@
 
 module Lec_11_16_23 where
 
-import Prelude hiding (getLine)
+import Prelude hiding (sum, getLine)
 import Data.Char (isAlpha, isDigit)
 import Test.QuickCheck
+-- import Lec_10_17_23 (CircleT(xLoc))
 
 default (Int, Float)
 
@@ -215,45 +216,166 @@ digitIntP = do
 -- >>> runParser intP "123,45,6"
 -- [(123,",45,6")]
 
--- ProgressCancelledException
 manyP :: Parser a -> Parser [a]
 manyP aP = many1P aP <|> return []
 
+-- many1P tries to parse a NON-EMPTY list of [a]
 many1P :: Parser a -> Parser [a]
 many1P aP = do
     x <- aP
     xs <- manyP aP
     return (x:xs)
 
-{-
-return []   --->      (\cs -> [([], cs)])
-
-failP       --->      (\cs -> [])
+-- >>> runParser (manyP digitCharP) "84839lksflasjfl923849234"
+-- [("84839","lksflasjfl923849234")]
 
 
 
-fail
 
--}
-
--- do
---     x  <- aP
---     xs <- manyP aP
---     return (x:xs)
-
+-- >>> runParser intP "cat"
+-- []
 
 intP :: Parser Int
 intP = do
-    cs <- manyP digitCharP
+    cs <- many1P digitCharP
     return (read cs)
+
+-- >>> runParser calc0 "10 - 5 - 5"
+-- [(10,"")]
+
+intP' :: Parser Int
+intP' = do
+    _ <- spaces
+    x <- intP
+    _ <- spaces
+    return x
+
+spaces :: Parser [Char]
+spaces = manyP (char ' ')
+
+calc0 :: Parser Int
+calc0 = binExp <|> intP'
+
+binExp :: Parser Int
+binExp = do
+    x <- intP'
+    o <- opP
+    y <- calc0
+    return (x `o` y)
+
+-- >>> runParser calc1 "((100*10)+2"
+-- []
+
+calc1 :: Parser Int
+calc1 = binExp1 <|> intP'
+
+parens :: Parser a -> Parser a
+parens aP = do
+    _ <- char '('
+    a <- aP
+    _ <- char ')'
+    return a
+
+binExp1 :: Parser Int
+binExp1 = parens (do
+    x <- calc1
+    o <- opP
+    y <- calc1
+    return (x `o` y)
+    )
+
+-- >>> runParser calc2 "10-2-2"
+
+-- calc2 :: Parser Int
+-- calc2 = binExp2 <|> intP'
+
+-- binExp2 :: Parser Int
+-- binExp2 = do
+--     x <- calc2
+--     o <- opP
+--     y <- intP'
+--     return (x `o` y)
+
+-- >>> runParser calc2 "10-2-2"
+-- [(6,"")]
+calc2 :: Parser Int
+calc2 = sum
+
+sum :: Parser Int
+sum = chainl prod addP
+
+prod :: Parser Int
+prod = chainl base mulP
+
+base :: Parser Int
+base = intP <|> parens calc2
+
+
+
+
+chainl :: Parser b -> Parser (b -> b -> b) -> Parser b
+chainl bP oP = do {x <- bP; continue x}
+  where
+    continue n = do { o <- oP; y <- bP; continue (n `o` y) } <|> return n
+
+
+{-
+prod = do {x <- base; continue x}
+  where
+    continue n = do { o <- mulP; y <- base; continue (n `o` y) } <|> return n
+
+sum = do {x <- prod; continue x}
+  where
+    continue n = do { o <- addP; y <- prod; continue (n `o` y) } <|> return n
+
+-}
+
+
+-- >>> runParser calc2 "100+2*2"
+-- [(104,"")]
+
+-- n1 * n2 * n3 * n4
+
+mulP :: Parser (Int -> Int -> Int)
+mulP = timesP <|> divP
+  where
+    timesP = do {_ <- char '*'; return (*) }
+    divP = do {_ <- char '/'; return div }
+
+addP :: Parser (Int -> Int -> Int)
+addP = plusP <|> minusP
+  where
+    plusP = do {_ <- char '+'; return (+) }
+    minusP = do {_ <- char '-'; return (-) }
+
+
+
+
+
+
+
 
 -- >>> quickCheck prop_revapp
 prop_revapp :: [Int] -> [Int] -> Bool
 prop_revapp xs ys =
-    reverse (xs ++ ys) == reverse xs ++ reverse ys
+    reverse (xs ++ ys) == reverse ys ++ reverse xs
+-- [x1,x2,x3, y1,y2,y3]
 
 quickCheckN :: Testable prop => Int -> prop -> IO ()
 quickCheckN n = quickCheckWith (stdArgs {maxSuccess = n})
+
+-- >>> qs [3,1,2,7,4]
+-- getLinkDeps: Home module not loaded Lec_10_17_23 cse230-code-0.1.0.0-inplace
+
+qs :: Ord a => [a] -> [a]
+qs [] = []
+qs (x:xs) = qs ls ++ [x] ++ qs rs
+  where
+    ls = [y | y <- xs, y <= x]
+    rs = [y | y <- xs, x < y]
+
+prop_qs_num_elems :: [Int] -> Bool
+prop_qs_num_elems xs = length xs == length (qs xs)
 
 
 randomThings :: (Arbitrary a) => IO [a]
