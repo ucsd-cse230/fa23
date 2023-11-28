@@ -72,4 +72,4 @@ menu1 = Bind Burrito 10 (Bind Taco 5 (Bind Salsa 0 (Def 1000000)))
 
 get :: Eq k => Table k v -> k -> v
 get (Bind key value rest) k = if key == k then value else get rest k
-get (Def value )          k = value
+get (Def value )          _ = value

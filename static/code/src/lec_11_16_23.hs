@@ -353,8 +353,6 @@ addP = plusP <|> minusP
 
 
 
-
-
 -- >>> quickCheck prop_revapp
 prop_revapp :: [Int] -> [Int] -> Bool
 prop_revapp xs ys =

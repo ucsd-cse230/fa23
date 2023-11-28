@@ -27,6 +27,7 @@ library
       Lec_11_14_23
       Lec_11_16_23
       Lec_11_21_23
+      Lec_11_28_23
 
   hs-source-dirs:
       src
@@ -51,6 +52,7 @@ library
     -O2
     -Werror
     -Wno-type-defaults
+    -fno-warn-missing-signatures
 
 
 executable stm

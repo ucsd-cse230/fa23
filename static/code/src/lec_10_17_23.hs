@@ -297,7 +297,8 @@ height = foldTree (\a b -> 1 + max a b) 0
 -- height (Leaf _)   = 0
 -- height (Node l r) = 1 + max (height l) (height r)
 
-foldTree op b (Leaf x)   = b
+foldTree :: (t -> t -> t) -> t -> Tree a -> t
+foldTree _  b (Leaf _)   = b
 foldTree op b (Node l r) = lr `op` rr
                               where
                                 lr = foldTree op b l
