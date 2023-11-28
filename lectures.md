@@ -25,7 +25,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *11/2*     | **First Midterm**               |                           |                      |                    |
 | *11/7*     |  Iteration and State            | [html-1][09-list] [html-2][10-state]   |  [pdf][10-pdf] | [code][code-11-7] |
 | *11/14*    | Parser Combinators              | [html][11-parsers]        |                      | [code][code-11-14] |
-| *11/16*    | Property-based Testing          | [html][14-testing]        |                      | [code][code-11-16] |
+| *11/21*    | Property-based Testing          | [html][14-testing]        |                      | [code][code-11-21] |
 
 <!--
 | *11/16*    | Monad Transformers              | [html][13-transformers]   |                      | [code][code-11-9]  |
@@ -82,4 +82,5 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [code-11-7]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_11_7_23.hs
 [code-11-14]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_11_14_23.hs
 [code-11-16]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_11_16_23.hs
+[code-11-21]: https://github.com/ucsd-cse230/fa23/tree/main/static/code/src/lec_11_21_23.hs
 
