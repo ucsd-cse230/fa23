@@ -1,5 +1,9 @@
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE FlexibleContexts #-}
+{-# OPTIONS_GHC -Wno-noncanonical-monad-instances #-}
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Eta reduce" #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Lec_11_28_23 where
 
@@ -18,6 +22,74 @@ exp0 = Div (Number 200) (Plus (Number 7) (Number (-5)))
 
 exp1 :: Expr
 exp1 = Div (Number 200) (Plus (Number 5) (Number (-5)))
+
+-- >>> eval exp0
+
+-- >>> eval exp1
+
+eval :: Expr -> Int
+eval (Number n)    = n
+eval (Plus  e1 e2) = eval e1   +   eval e2
+eval (Div   e1 e2) = eval e1 `div` eval e2
+
+----------------------------------------------------------------------
+-- | The "Exception" monad
+----------------------------------------------------------------------
+
+data Result a = Err String | Ok a deriving (Show, Functor)
+
+instance Applicative Result where
+
+instance Monad Result where
+  return :: a -> Result a
+  return x = Ok x
+
+  (>>=) :: Result a -> (a -> Result b) -> Result b
+  (Ok x) >>= f = f x
+  (Err s) >>= _ = Err s
+
+-- >>> evalR exp0
+-- Ok 100
+
+-- >>> evalR exp1
+-- Err "dbz: Plus (Number 5) (Number (-5))"
+
+evalR :: Expr -> Result Int
+evalR = go
+  where
+    go (Number n) =
+      return n
+    go (Plus e1 e2) = do
+      n1 <- go e1
+      n2 <- go e2
+      return (n1 + n2)
+    go (Div e1 e2) = do
+      n1 <- go e1
+      n2 <- go e2
+      if n2 /= 0 then Ok(div n1 n2) else Err ("dbz: " ++ show e2)
+
+{- "Result" is known as "Either" -}
+
+evalE :: Expr -> Either Expr Int
+evalE = go
+  where
+    go (Number n) =
+      return n
+    go (Plus e1 e2) = do
+      n1 <- go e1
+      n2 <- go e2
+      return (n1+n2)
+    go (Div e1 e2)  = do
+      n1 <- go e1
+      n2 <- go e2
+      if n2 == 0 then throw e2 else return (div n1 n2)
+
+throw :: a -> Either a b
+throw = Left
+
+----------------------------------------------------------------------
+-- | A "Profiling" monad
+----------------------------------------------------------------------
 
 
 type Profile a = State Int a
@@ -61,22 +133,8 @@ count = do
 
 
 -- >>> (evalE exp0)
--- Right 20
+-- Right 100
 
-
-
--- eval :: Expr -> Int
--- eval (Number n)   = n
--- eval (Plus e1 e2) = eval e1 + eval e2
--- eval (Div e1 e2)  = eval e1 `div` eval e2
-
-
-showProf :: Show a => MyProf a -> String
-showProf p = Printf.printf "result = %s, count = %d" (show v) n
-  where
-    (v, n) = runState p 0
-
-type MyProf a = State Int (Either Expr a)
 
 
 
@@ -85,8 +143,6 @@ thump = do
   n <- get
   put (n + 1)
 
-showAndAdd :: (Show a, Num a) => a -> String
-showAndAdd x = show (x + 1)
 
 -- >>> exp0
 -- Div (Number 200) (Plus (Number 5) (Number (-5)))
@@ -106,74 +162,10 @@ evalPE (Div e1 e2)  = do
     if n2 == 0 then throwError e2 else return (div n1 n2)
 
 
+-- >>> runExProf (evalPE exp0)
 
+-- >>> runExProf (evalPE exp1)
 
-
-
-
-
-bump :: MyProf ()
-bump = do
-    n <- get
-    put (n + 1)
-    return (Right ())
-
-
-evalP :: Expr -> MyProf Int
-evalP (Number n)   = return (Right n)
-evalP (Plus e1 e2) = do
-  n1 <- evalP e1
-  n2 <- evalP e2
-  _  <- bump
-  return (do {v1 <- n1; v2 <- n2; return (v1+v2) })
-
-evalP (Div e1 e2) = do
-  n1 <- evalP e1
-  n2 <- evalP e2
-  _  <- bump
-  return (do {v1 <- n1; v2 <- n2; if v2 == 0 then throw e2 else return (div v1 v2) })
-
-
-
--- >>> showProf (evalP exp0)
--- "result = Left (Plus (Number 5) (Number (-5))), count = 2"
-
--- "result = Right 20, count = 2"
-
-
-
-
-
-
-evalE :: Expr -> Either Expr Int
-evalE (Number n)   = return n
-evalE (Plus e1 e2) = do
-    n1 <- evalE e1
-    n2 <- evalE e2
-    return (n1+n2)
-evalE (Div e1 e2)  = do
-    n1 <- evalE e1
-    n2 <- evalE e2
-    if n2 == 0 then throw e2 else return (div n1 n2)
-
-throw :: a -> Either a b
-throw = Left
-
-
-evalProf :: Expr -> ExProf Int
-evalProf = eval
-  where
-    eval (Number n)    = return n
-    eval (Plus  e1 e2) = do n1 <- eval e1
-                            n2 <- eval e2
-                            count
-                            return (n1+n2)
-    eval (Div   e1 e2) = do n1 <- eval e1
-                            n2 <- eval e2
-                            count
-                            if n2 == 0 then throwError e2 else return (n1 `div` n2)
--- >>> runExProf (evalProf expr1)
--- (Right 20,2)
 
 runProfEx :: ProfEx a -> Either Expr (a, Int)
 runProfEx profex = res
@@ -192,8 +184,6 @@ expr1 = Div (Number 200) (Plus (Number 5) (Number 5))
 
 expr2 :: Expr
 expr2 = Div (Number 10) (Plus (Number 5) (Number (-5)))
-
-
 
 
 type Prof = StateT Int Ident
@@ -222,41 +212,20 @@ instance Monad Ident where
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 newtype Identity a = Id { unId :: a }  deriving (Functor)
-
-
-
-
-
-
-
-
-
-
 
 instance Monad Identity where
   (Id a) >>= f = f a
 
 
-type ProfExn = StateT Int Exn
-type ExnProf = ExceptT Expr Prof
+-- type ProfExn = StateT Int Exn
+-- type ExnProf = ExceptT Expr Prof
 
-runExnProf :: (Show a) => ExnProf a -> Either Expr (a, Int)
-runExnProf _ep = undefined
+-- runExnProf :: (Show a) => ExnProf a -> Either Expr (a, Int)
+-- runExnProf _ep = undefined
 
-runProfExn :: (Show a) => ProfExn a -> Either Expr (a, Int)
-runProfExn _ep = undefined
+-- runProfExn :: (Show a) => ProfExn a -> Either Expr (a, Int)
+-- runProfExn _ep = undefined
 
 -- runStateT :: StateT s m a -> s -> m (a, s)
 

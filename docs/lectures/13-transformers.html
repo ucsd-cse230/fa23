@@ -465,12 +465,13 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Expr</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=</span> <span class="dt">Number</span>  <span class="dt">Int</span>            <span class="co">-- ^ 0,1,2,3,4</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">Plus</span>    <span class="dt">Expr</span> <span class="dt">Expr</span>      <span class="co">-- ^ e1 + e2</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">Try</span>     <span class="dt">Expr</span> <span class="dt">Int</span>       </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">Div</span>     <span class="dt">Expr</span> <span class="dt">Expr</span>      <span class="co">-- ^ e1 / e2</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="dt">Try</span>     <span class="dt">Expr</span> <span class="dt">Int</span>       <span class="co">-- ^ try e1 n</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">deriving</span> (<span class="dt">Show</span>)</span></code></pre></div>
 <p>Informally, <code class="sourceCode haskell">try e n</code> evaluates to <code class="sourceCode haskell">e</code> but</p>
 <ul>
-<li><p>if <code class="sourceCode haskell">e</code> is undefined due to <em>divide-by-zero</em></p></li>
-<li><p>then evaluate to <code class="sourceCode haskell">n</code></p></li>
+<li><p><strong>if</strong> <code class="sourceCode haskell">e</code> is undefined due to <em>divide-by-zero</em></p></li>
+<li><p><strong>then</strong> evaluate to <code class="sourceCode haskell">n</code></p></li>
 </ul>
 <div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ot">eval ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Either</span> <span class="dt">Expr</span> <span class="dt">Int</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>eval (<span class="dt">Number</span> n)    <span class="ot">=</span> <span class="fu">return</span> n</span>

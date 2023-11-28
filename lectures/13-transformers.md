@@ -327,15 +327,16 @@ Lets change our `Expr` type to
 data Expr
   = Number  Int            -- ^ 0,1,2,3,4
   | Plus    Expr Expr      -- ^ e1 + e2
-  | Try     Expr Int       
+  | Div     Expr Expr      -- ^ e1 / e2
+  | Try     Expr Int       -- ^ try e1 n
   deriving (Show)
 ```
 
 Informally, `try e n` evaluates to `e` but 
 
-- if `e` is undefined due to *divide-by-zero* 
+- **if** `e` is undefined due to *divide-by-zero* 
 
-- then evaluate to `n`
+- **then** evaluate to `n`
 
 ```haskell
 eval :: Expr -> Either Expr Int
