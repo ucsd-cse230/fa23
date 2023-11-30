@@ -46,6 +46,8 @@ library
     , stm
     , time
     , unordered-containers
+    , vector
+    , text
   default-language: Haskell2010
   ghc-options:
     -Wall
