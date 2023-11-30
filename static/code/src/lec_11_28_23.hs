@@ -205,10 +205,7 @@ tick = do
 
 -- evalPr :: (MonadState Int m) => Expr -> m Int
 
-runProf :: Show v => Prof v -> String
-runProf st = showValCount z
-  where
-    z = unId (runStateT st 0)
+
 
 
 data SillyFun = MkSillyFun (Int -> Int)
@@ -221,18 +218,8 @@ runSilly (MkSillyFun f) n = f n
 -- >>> runSilly silly 10
 -- 20
 
--- Couldn't match expected type `t0_ao2UU[tau:1] -> t_ao2UW[sk:1]'
---             with actual type `SillyFun'
--- The function `silly' is applied to one value argument,
---   but its type `SillyFun' has none
--- In the expression: silly 10
--- In an equation for `it_ao2TB': it_ao2TB = silly 10
--- Relevant bindings include
---   it_ao2TB :: t_ao2UW[sk:1]
---     (bound at /Users/rjhala/teaching/fa23/static/code/src/lec_11_28_23.hs:218:2)
 
--- evalPr :: Expr -> Prof Int
-evalPr :: Expr -> State Int Int
+evalPr :: Expr -> Prof Int
 evalPr = go
   where
     go (Number n)   =
@@ -248,13 +235,21 @@ evalPr = go
       tick
       return (div n1 n2)
 
+-- >>> runProf (evalPr exp0)
+-- "value: 100, #ops: 2"
+
+-- >>> runExProf (evalPE exp0)
+-- (Right 100,2)
+
+-- >>> runExProf (evalPE exp1)
+-- (Left (Plus (Number 5) (Number (-5))),2)
+
+-- >>> runProfEx (evalPE exp0)
+-- Right (100,2)
+-- >>> runProfEx (evalPE exp1)
+-- Left (Plus (Number 5) (Number (-5)))
+
 type Prof a = StateT Int Identity a
-
-    --   if n2 /= 0 then return (div n1 n2) else throwError e2
-    -- go (Try e n) = catchError (go e) (\_ -> return n)
-
-
-
 
 runProfile :: (Show a) => Profile a -> String
 runProfile st = showValCount (runState st 0)
@@ -359,58 +354,19 @@ evalPE (Div e1 e2)  = do
 
 -- >>> runExProf (evalPE exp0)
 
--- >>> runExProf (evalPE exp1)
-{-
-
-runProfEx :: ProfEx a -> Either Expr (a, Int)
-runProfEx profex = res
-  where
-    Ident res = runExceptT (runStateT profex 0)
-
-runExProf :: ExProf a -> (Either Expr a, Int)
-runExProf exprof = foo
-    where
-        Ident foo = runStateT (runExceptT exprof) 0
-
--- foo = (runExceptT, runStateT)
-
-expr1 :: Expr
-expr1 = Div (Number 200) (Plus (Number 5) (Number 5))
-
-expr2 :: Expr
-expr2 = Div (Number 10) (Plus (Number 5) (Number (-5)))
-
-
--- type Prof = StateT Int Ident
-
-type Exn  = ExceptT Expr Ident
-
-type ExProf = ExceptT Expr Prof
-
-type ProfEx = StateT  Int Exn
-
--}
-
-
-newtype Ident a = Ident a
-
-instance Functor Ident where
-    fmap f (Ident a) = Ident (f a)
-
-instance Applicative Ident where
-  pure x = Ident x
-  (Ident f) <*> (Ident x) = Ident (f x)
-
-instance Monad Ident where
-  return        = pure
-  Ident a >>= f = f a
-
-
-
 newtype Identity a = Id { unId :: a }  deriving (Functor)
 
+runIdentity :: Identity a -> a
+runIdentity (Id x) = x
+
+instance Applicative Identity where
+   pure x        = Id x
+   Id f <*> Id x = Id (f x)
+
+
+
 instance Monad Identity where
-  (Id a) >>= f = f a
+   (Id a) >>= f = f a
 
 
 -- type ProfExn = StateT Int Exn
@@ -442,9 +398,6 @@ instance Monad Identity where
 
 
 
-instance Applicative Identity where
-  pure x        = Id x
-  Id f <*> Id x = Id (f x)
 
 
 -- runProfExn ep = unId (runExceptT (runStateT ep 0))
