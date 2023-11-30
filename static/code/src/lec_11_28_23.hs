@@ -235,21 +235,29 @@ evalPr = go
       tick
       return (div n1 n2)
 
--- >>> runProf (evalPr exp0)
--- "value: 100, #ops: 2"
+-- >>> exp0
+--  (Div (Number 200) (Plus (Number 7) (Number (-5))))
 
--- >>> runExProf (evalPE exp0)
--- (Right 100,2)
+-- >>> runProf (evalPr (Plus (Number 10000) exp0))
+-- (10100,3)
 
--- >>> runExProf (evalPE exp1)
--- (Left (Plus (Number 5) (Number (-5))),2)
+type Prof a   = StateT Int Identity a
 
--- >>> runProfEx (evalPE exp0)
--- Right (100,2)
--- >>> runProfEx (evalPE exp1)
--- Left (Plus (Number 5) (Number (-5)))
+-- runStateT :: Int -> Identity (a, Int)
 
-type Prof a = StateT Int Identity a
+runProf :: Prof a -> (a, Int)
+runProf st = runIdentity (runStateT st 0)
+
+
+
+
+
+data Jhala = MkJhala { fooField :: Int -> Int }
+
+rj = MkJhala (\n -> n + 1)
+
+bob = fooField rj 100
+
 
 runProfile :: (Show a) => Profile a -> String
 runProfile st = showValCount (runState st 0)
@@ -350,9 +358,29 @@ evalPE (Div e1 e2)  = do
     n2 <- evalPE e2
     thump
     if n2 == 0 then throwError e2 else return (div n1 n2)
+evalPE (Try e n) = do
+    catchError (evalPE e) (\_ -> return n)
 
+type ExProf a = ExceptT Expr (StateT Int Identity) a
 
--- >>> runExProf (evalPE exp0)
+type ProfEx a = StateT Int (ExceptT Expr Identity) a
+
+runExProf :: ExProf a -> (Either Expr a, Int)
+runExProf st = runIdentity (runStateT (runExceptT st) 0)
+
+runProfEx :: ProfEx a -> Either Expr (a, Int)
+runProfEx st = runIdentity (runExceptT (runStateT st 0))
+
+-- >>> (Plus (Number 100000) exp1)
+-- Div (Number 200) (Plus (Number 7) (Number (-5)))
+
+-- >>> runExProf (evalPE (Plus (Number 10000) exp0))
+
+-- >>> (Plus (Number 100000) exp1)
+-- Div (Number 200) (Plus (Number 5) (Number (-5)))
+
+-- >>> runExProf (evalPE (Plus (Number 10000) exp1))
+
 
 newtype Identity a = Id { unId :: a }  deriving (Functor)
 
